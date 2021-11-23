@@ -1,0 +1,60 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Daily Limit</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="['/admin/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Daily Limit Management</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="card">
+      <div class="card-body p-0">
+<!--        <div class="card-footer clearfix">-->
+<!--          <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#exampleModal"><i-->
+<!--            class="fas fa-plus"></i> Add-->
+<!--          </button>-->
+<!--        </div>-->
+        <div class="card-header green">
+          <h3 class="card-title">Daily Limits</h3>
+        </div>
+        <!-- /.card-header -->
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>Limit</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">
+            <td>{{vbelt.serialNo}}</td>
+            <td>{{vbelt.beltSize}}</td>
+            <td>{{vbelt.beltName}}</td>
+            <td>{{vbelt.qtyOnHand}}</td>
+            <td>{{vbelt.sellingPrice}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+          <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
+        </ul>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </section>
+  <!-- /.content -->
+</div>

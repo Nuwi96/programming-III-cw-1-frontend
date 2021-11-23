@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <div class="card card-warning">
+    <div class="card-header">
+      <h3 class="card-title">Farmer</h3>
+    </div>
+    <div class="card-body">
+      <select id="itemType" class="form-control" [(ngModel)]="selectedOption">
+        <option selected value="">Select a Farmer</option>
+        <option>V Belt</option>
+        <option>Foot</option>
+        <option>Needle</option>
+      </select>
+    </div>
+  </div>
+</div>
+<!--*ngIf="selectedOption===''"-->
+<div  class="container-fluid">
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Add Item</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form #frmItems="ngForm" (ngSubmit)="saveItem()" role="form">
+      <div class="card-body">
+<!--        <div class="form-group">-->
+<!--          <label for="serialNo">Serial Number</label>-->
+<!--          <input type="text" name="serialNo" id="serialNo" [(ngModel)]="item.serialNo" class="form-control" placeholder="SN0036323">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="brand">Paddy Amount</label>-->
+<!--          <select class="form-control" name="brand" [(ngModel)]="selectedBrand">-->
+<!--            <option *ngFor="let brand of brands" id="brand" [ngValue]="brand">{{brand.brandName}}</option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="machineType">Machine Type</label>-->
+<!--          <select id="machineType" name="machineType" class="form-control" [(ngModel)]="selectedMachineType">-->
+<!--            <option *ngFor="let machineType of machineTypes"-->
+<!--                    [ngValue]="machineType">{{machineType.machineType}}</option>-->
+<!--          </select>-->
+<!--        </div>-->
+        <div class="form-group">
+          <label for="amount">Paddy Amount</label>
+          <input id="amount" name="amount" [(ngModel)]="item.model" type="text" class="form-control"
+                 placeholder="Amount">
+        </div>
+<!--        <div class="form-group">-->
+<!--          <label for="description">Description</label>-->
+<!--          <input id="description" name="description" [(ngModel)]="item.description" type="text" class="form-control"-->
+<!--                 placeholder="KNEE LIFTER ROD">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="partNo">Part Number</label>-->
+<!--          <input id="partNo" name="partNo" [(ngModel)]="item.partNumber" type="text" class="form-control"-->
+<!--                 placeholder="110-38650">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <label for="quantityOnHand">Quantity on Hand</label>-->
+<!--          <input type="text" name="quantityOnHand" id="quantityOnHand" [(ngModel)]="item.qtyOnHand" class="form-control" placeholder="10">-->
+<!--        </div>-->
+        <div class="form-group">
+          <label for="billPrice">Billing Price</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Rs</span>
+            </div>
+            <input type="text" name="billPrice" id="billPrice" [(ngModel)]="item.billingPrice" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text">.00</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sellingPrice">Selling Price</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Rs</span>
+            </div>
+            <input type="text" name="sellingPrice" id="sellingPrice" [(ngModel)]="item.sellingPrice" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text">.00</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

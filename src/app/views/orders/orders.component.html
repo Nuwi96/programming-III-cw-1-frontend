@@ -1,0 +1,105 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Orders</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="['/admin/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Orders</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="card">
+      <div class="card-body p-0">
+        <div class="card-footer clearfix">
+          <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#exampleModal"><i
+            class="fas fa-plus"></i> Add
+          </button>
+        </div>
+        <div class="card-header green">
+          <h3 class="card-title">Orders</h3>
+        </div>
+        <!-- /.card-header -->
+        <table class="table">
+          <thead>
+          <tr>
+            <th># Order ID.</th>
+            <th>Place By</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>#</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">
+            <td>{{vbelt.serialNo}}</td>
+            <td>{{vbelt.beltSize}}</td>
+            <td>{{vbelt.beltName}}</td>
+            <td>{{vbelt.qtyOnHand}}</td>
+            <td>{{vbelt.sellingPrice}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+          <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
+        </ul>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </section>
+  <!-- /.content -->
+  <!--  modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Add New Order</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="centerID" class="col-form-label font-weight-normal">Center ID:</label>
+              <select name="" class="form-control" id="centerID">
+                <option value="">AAAA</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="VehicleID" class="col-form-label font-weight-normal">Vehicle ID:</label>
+              <select name="" class="form-control" id="VehicleID">
+                <option value="">AAAA</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="placeBy" class="col-form-label font-weight-normal">Placed By:</label>
+              <input type="text" class="form-control" id="placeBy">
+            </div>
+            <div class="form-group">
+              <label for="address" class="col-form-label">Address:</label>
+              <textarea class="form-control" id="address"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

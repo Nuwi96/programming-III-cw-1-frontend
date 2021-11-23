@@ -1,0 +1,138 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary green elevation-4">
+  <!-- Brand Logo -->
+  <a href="index3.html" class="brand-link">
+<!--    <img src="./assets/img/logo.png" alt="Pubudu Enterprises Logo" class="brand-image"-->
+<!--         style="opacity: .8">-->
+    <span class="brand-text font-weight-light">Paddy Storage Cooperation</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+<!--        <img src="./assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
+      </div>
+      <div class="info">
+<!--        <a href="#" class="d-block">Alexander Pierce</a>-->
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <li class="nav-item">
+          <a [routerLink]="['/admin/dashboard']" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Dashboard
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin/customers']" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-person-booth"></i>
+            <p>
+              Farmers
+<!--              <span class="right badge badge-danger">New</span>-->
+            </p>
+          </a>
+        </li>
+        <li class="nav-item has-treeview">
+          <a [routerLink]="['/admin/items']" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-sitemap"></i>
+            <p>
+              Paddy
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/admin/items/view-items']" routerLinkActive="active" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Paddy collection</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/admin/items/add-item']" routerLinkActive="active" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Add record</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/admin/items/edit-item']" routerLinkActive="active" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Paddy Stock</p>
+              </a>
+            </li>
+<!--            <li class="nav-item">-->
+<!--              <a [routerLink]="['/admin/items/categories']" routerLinkActive="active" class="nav-link">-->
+<!--                <i class="far fa-circle nav-icon"></i>-->
+<!--                <p>Add/Edit Brand</p>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a [routerLink]="['/admin/items/sub-categories']" routerLinkActive="active" class="nav-link">-->
+<!--                <i class="far fa-circle nav-icon"></i>-->
+<!--                <p>Add/Edit Machine Types</p>-->
+<!--              </a>-->
+<!--            </li>-->
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin/orders']"routerLinkActive="active"  class="nav-link">
+            <i class="nav-icon fas fa-chart-pie"></i>
+            <p>
+              Orders
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin/place-orders']" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <p>
+              Daily Limit
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin/price-management']" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <p>
+             Buying/Selling Price
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin/center-details']" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <p>
+             Center Details
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin/users']" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <p>
+             Users
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/admin/vehicle']" routerLinkActive="active" class="nav-link">
+            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <p>
+             Vehicle
+            </p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

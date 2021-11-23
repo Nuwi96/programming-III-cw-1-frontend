@@ -1,0 +1,138 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header green">
+      <h3 class="card-title">Paddy Stock</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+      <table class="table">
+        <thead>
+        <tr>
+          <th># Regional Center</th>
+          <th>Available Paddy Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of items | paginate: { itemsPerPage: 10, currentPage: pItem }">
+          <td>{{item.serialNo}}</td>
+          <td>{{item.brand.brandName}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer clearfix">
+      <ul class="pagination pagination-sm m-0 float-right">
+        <pagination-controls class="page-item" (pageChange)="pItem = $event"></pagination-controls>
+      </ul>
+    </div>
+    <!-- /.card-body -->
+  </div>
+
+  <!--  <div class="card">-->
+  <!--    <div class="card-header bg-purple">-->
+  <!--      <h3 class="card-title">All VBelts</h3>-->
+  <!--    </div>-->
+  <!--    &lt;!&ndash; /.card-header &ndash;&gt;-->
+  <!--    <div class="card-body p-0">-->
+  <!--      <table class="table">-->
+  <!--        <thead>-->
+  <!--        <tr>-->
+  <!--          <th># Serial No.</th>-->
+  <!--          <th>Belt Size</th>-->
+  <!--          <th>Belt Name</th>-->
+  <!--          <th>QTY On Hand</th>-->
+  <!--          <th>Price</th>-->
+  <!--        </tr>-->
+  <!--        </thead>-->
+  <!--        <tbody>-->
+  <!--        <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">-->
+  <!--          <td>{{vbelt.serialNo}}</td>-->
+  <!--          <td>{{vbelt.beltSize}}</td>-->
+  <!--          <td>{{vbelt.beltName}}</td>-->
+  <!--          <td>{{vbelt.qtyOnHand}}</td>-->
+  <!--          <td>{{vbelt.sellingPrice}}</td>-->
+  <!--        </tr>-->
+  <!--        </tbody>-->
+  <!--      </table>-->
+  <!--    </div>-->
+  <!--    <div class="card-footer clearfix">-->
+  <!--      <ul class="pagination pagination-sm m-0 float-right">-->
+  <!--        <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>-->
+  <!--      </ul>-->
+  <!--    </div>-->
+  <!--    &lt;!&ndash; /.card-body &ndash;&gt;-->
+  <!--  </div>-->
+
+  <!--  <div class="card">-->
+  <!--    <div class="card-header bg-teal">-->
+  <!--      <h3 class="card-title">All Foot s</h3>-->
+  <!--    </div>-->
+  <!--    &lt;!&ndash; /.card-header &ndash;&gt;-->
+  <!--    <div class="card-body p-0">-->
+  <!--      <table class="table">-->
+  <!--        <thead>-->
+  <!--        <tr>-->
+  <!--          <th># Serial No.</th>-->
+  <!--          <th>Foot Type</th>-->
+  <!--          <th>Part Number</th>-->
+  <!--          <th>QTY On Hand</th>-->
+  <!--          <th>Price</th>-->
+  <!--        </tr>-->
+  <!--        </thead>-->
+  <!--        <tbody>-->
+  <!--        <tr *ngFor="let foot of foots | paginate: { itemsPerPage: 10, currentPage: pFoot }">-->
+  <!--          <td>{{foot.serialNo}}</td>-->
+  <!--          <td>{{foot.footType}}</td>-->
+  <!--          <td>{{foot.partNumber}}</td>-->
+  <!--          <td>{{foot.qtyOnHand}}</td>-->
+  <!--          <td>{{foot.sellingPrice}}</td>-->
+  <!--        </tr>-->
+  <!--        </tbody>-->
+  <!--      </table>-->
+  <!--    </div>-->
+  <!--    <div class="card-footer clearfix">-->
+  <!--      <ul class="pagination pagination-sm m-0 float-right">-->
+  <!--        <pagination-controls class="page-item" (pageChange)="pFoot = $event"></pagination-controls>-->
+  <!--      </ul>-->
+  <!--    </div>-->
+  <!--    &lt;!&ndash; /.card-body &ndash;&gt;-->
+  <!--  </div>-->
+
+  <!--  <div class="card">-->
+  <!--    <div class="card-header bg-warning">-->
+  <!--      <h3 class="card-title">All Needles</h3>-->
+  <!--    </div>-->
+  <!--    &lt;!&ndash; /.card-header &ndash;&gt;-->
+  <!--    <div class="card-body p-0">-->
+  <!--      <table class="table">-->
+  <!--        <thead>-->
+  <!--        <tr>-->
+  <!--          <th># Serial No.</th>-->
+  <!--          <th>Needle Type</th>-->
+  <!--          <th>Needle Size</th>-->
+  <!--          <th>Brand</th>-->
+  <!--          <th>QTY On Hand</th>-->
+  <!--          <th>Price</th>-->
+  <!--        </tr>-->
+  <!--        </thead>-->
+  <!--        <tbody>-->
+  <!--        <tr *ngFor="let needle of needles | paginate: { itemsPerPage: 10, currentPage: pNeedle }">-->
+  <!--          <td>{{needle.serialNo}}</td>-->
+  <!--          <td>{{needle.needleType}}</td>-->
+  <!--          <td>{{needle.needleSize}}</td>-->
+  <!--          <td>{{needle.brand.brandName}}</td>-->
+  <!--          <td>{{needle.qtyOnHand}}</td>-->
+  <!--          <td>{{needle.sellingPrice}}</td>-->
+  <!--        </tr>-->
+  <!--        </tbody>-->
+  <!--      </table>-->
+  <!--    </div>-->
+  <!--    <div class="card-footer clearfix">-->
+  <!--      <ul class="pagination pagination-sm m-0 float-right">-->
+  <!--        <pagination-controls class="page-item" (pageChange)="pNeedle = $event"></pagination-controls>-->
+  <!--      </ul>-->
+  <!--    </div>-->
+  <!--    &lt;!&ndash; /.card-body &ndash;&gt;-->
+  <!--  </div>-->
+
+</div>
