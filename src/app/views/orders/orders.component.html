@@ -22,146 +22,84 @@
     <div class="card">
       <div class="card-body p-0">
         <div class="card-footer clearfix">
-          <div class="row">
-            <div class="border col-6 p-3">
-              <form>
-                <div class="form-group">
-                  <label for="centerID" class="col-form-label font-weight-normal">Center ID:</label>
-                  <select name="" class="form-control" id="centerID">
-                    <option value="">AAAA</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="VehicleID" class="col-form-label font-weight-normal">Vehicle ID:</label>
-                  <select name="" class="form-control" id="VehicleID">
-                    <option value="">AAAA</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="placeBy" class="col-form-label font-weight-normal">Placed By:</label>
-                  <input type="text" class="form-control" id="placeBy">
-                </div>
-                <div class="form-group">
-                  <label for="address" class="col-form-label">Address:</label>
-                  <textarea class="form-control" id="address"></textarea>
-                </div>
-              </form>
-              <div class="float-right">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Clear</button>
-                <button type="button" class="btn btn-primary ml-2">Save</button>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="card-header green">
-                <h3 class="card-title">Orders</h3>
-              </div>
-              <table class="table">
-                <thead>
-                <tr>
-                  <th># Order ID.</th>
-                  <th>Place By</th>
-                  <th>Date</th>
-                  <th>Amount</th>
-                  <th>#</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }" (click)="getRecord(vbelt)">
-                  <td>{{vbelt.id}}</td>
-                  <td>{{vbelt.name}}</td>
-                  <td>{{vbelt.district}}</td>
-                  <td>{{vbelt.aaa}}</td>
-                  <td>{{vbelt.bbb}}</td>
-                  <td><button (click)="deleteRecord(vbelt.id)" class="btn btn-outline-danger border-0 pt-0"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-                </tr>
-                </tbody>
-              </table>
-              <div class="clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                  <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
-                </ul>
-              </div>
-            </div>
-          </div>
-<!--          <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#exampleModal"><i-->
-<!--            class="fas fa-plus"></i> Add-->
-<!--          </button>-->
+          <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#exampleModal"><i
+            class="fas fa-plus"></i> Add
+          </button>
         </div>
-<!--        <div class="card-header green">-->
-<!--          <h3 class="card-title">Orders</h3>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; /.card-header &ndash;&gt;-->
-<!--        <table class="table">-->
-<!--          <thead>-->
-<!--          <tr>-->
-<!--            <th># Order ID.</th>-->
-<!--            <th>Place By</th>-->
-<!--            <th>Date</th>-->
-<!--            <th>Amount</th>-->
-<!--            <th>#</th>-->
-<!--          </tr>-->
-<!--          </thead>-->
-<!--          <tbody>-->
-<!--          <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">-->
-<!--            <td>{{vbelt.serialNo}}</td>-->
-<!--            <td>{{vbelt.beltSize}}</td>-->
-<!--            <td>{{vbelt.beltName}}</td>-->
-<!--            <td>{{vbelt.qtyOnHand}}</td>-->
-<!--            <td>{{vbelt.sellingPrice}}</td>-->
-<!--          </tr>-->
-<!--          </tbody>-->
-<!--        </table>-->
+        <div class="card-header green">
+          <h3 class="card-title">Orders</h3>
+        </div>
+        <!-- /.card-header -->
+        <table class="table">
+          <thead>
+          <tr>
+            <th># Order ID.</th>
+            <th>Place By</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>#</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">
+            <td>{{vbelt.serialNo}}</td>
+            <td>{{vbelt.beltSize}}</td>
+            <td>{{vbelt.beltName}}</td>
+            <td>{{vbelt.qtyOnHand}}</td>
+            <td>{{vbelt.sellingPrice}}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-<!--      <div class="card-footer clearfix">-->
-<!--        <ul class="pagination pagination-sm m-0 float-right">-->
-<!--          <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>-->
-<!--        </ul>-->
-<!--      </div>-->
+      <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+          <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
+        </ul>
+      </div>
       <!-- /.card-body -->
     </div>
   </section>
   <!-- /.content -->
   <!--  modal-->
-<!--  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
-<!--       aria-hidden="true">-->
-<!--    <div class="modal-dialog" role="document">-->
-<!--      <div class="modal-content">-->
-<!--        <div class="modal-header">-->
-<!--          <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Add New Order</h5>-->
-<!--          <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--            <span aria-hidden="true">&times;</span>-->
-<!--          </button>-->
-<!--        </div>-->
-<!--        <div class="modal-body">-->
-<!--          <form>-->
-<!--            <div class="form-group">-->
-<!--              <label for="centerID" class="col-form-label font-weight-normal">Center ID:</label>-->
-<!--              <select name="" class="form-control" id="centerID">-->
-<!--                <option value="">AAAA</option>-->
-<!--              </select>-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <label for="VehicleID" class="col-form-label font-weight-normal">Vehicle ID:</label>-->
-<!--              <select name="" class="form-control" id="VehicleID">-->
-<!--                <option value="">AAAA</option>-->
-<!--              </select>-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <label for="placeBy" class="col-form-label font-weight-normal">Placed By:</label>-->
-<!--              <input type="text" class="form-control" id="placeBy">-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <label for="address" class="col-form-label">Address:</label>-->
-<!--              <textarea class="form-control" id="address"></textarea>-->
-<!--            </div>-->
-<!--          </form>-->
-<!--        </div>-->
-<!--        <div class="modal-footer">-->
-<!--          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--          <button type="button" class="btn btn-primary">Save</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Add New Order</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="centerID" class="col-form-label font-weight-normal">Center ID:</label>
+              <select name="" class="form-control" id="centerID">
+                <option value="">AAAA</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="VehicleID" class="col-form-label font-weight-normal">Vehicle ID:</label>
+              <select name="" class="form-control" id="VehicleID">
+                <option value="">AAAA</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="placeBy" class="col-form-label font-weight-normal">Placed By:</label>
+              <input type="text" class="form-control" id="placeBy">
+            </div>
+            <div class="form-group">
+              <label for="address" class="col-form-label">Address:</label>
+              <textarea class="form-control" id="address"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

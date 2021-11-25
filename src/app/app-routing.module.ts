@@ -16,11 +16,14 @@ import {SubCategoriesComponent} from './views/item/sub-categories/sub-categories
 import {CenterDetailComponent} from './views/center-detail/center-detail.component';
 import {UsersComponent} from './views/users/users.component';
 import {VehicleComponent} from './views/vehicle/vehicle.component';
+import {AuthGuard} from './guard/auth/auth.guard';
+import {RoleGuard} from "./guard/role/role.guard";
 
 const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'customers', component: CustomerComponent },
@@ -32,9 +35,10 @@ const routes: Routes = [
           { path: 'categories', component: CategoriesComponent },
           { path: 'sub-categories', component: SubCategoriesComponent },
           { path: '', redirectTo: 'view-items', pathMatch: 'full' },
-        ]
+        ],
+        canActivate: [RoleGuard], data: {roles: ['ROLE_HEAD_OFFICE_MANAGER']}
       },
-      { path: 'orders', component: OrdersComponent },
+      { path: 'orders', component: OrdersComponent , canActivate: [RoleGuard], data: {roles: ['ROLE_HEAD_OFFICE_MANAGER']}},
       { path: 'place-orders', component: PlaceOrderComponent },
       { path: 'price-management', component: PriceManagementComponent },
       { path: 'center-details', component: CenterDetailComponent },
