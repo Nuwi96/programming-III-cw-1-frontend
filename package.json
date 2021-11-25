@@ -1,5 +1,5 @@
 {
-  "name": "Paddy Storage Cooperation",
+  "name": "PaddyStorageCooperation",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -24,6 +24,7 @@
     "angular-mat-datepicker": "^0.0.2",
     "angular-material-datepicker": "^1.0.2",
     "ngx-pagination": "^5.0.0",
+    "ngx-toastr": "^13.2.1",
     "rxjs": "~6.5.5",
     "sweetalert2": "^10.14.0",
     "tslib": "^2.0.0",

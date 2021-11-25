@@ -21,59 +21,35 @@
   <section class="content">
     <div class="card">
       <div class="card-body p-0">
-        <div class="card-footer clearfix">
-          <div class="row">
-            <div class="border col-6 p-3">
-              <form>
-                <div class="form-group">
-                  <label for="farmer-name" class="col-form-label font-weight-normal">Center Name:</label>
-                  <input type="text" class="form-control" id="farmer-name">
+                <div class="card-footer clearfix">
+                  <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#exampleModal"><i
+                    class="fas fa-plus"></i> Add
+                  </button>
                 </div>
-                <!--            <div class="form-group">-->
-                <!--              <label for="farmer-name" class="col-form-label font-weight-normal">age:</label>-->
-                <!--              <input type="text" class="form-control" id="farmer-age">-->
-                <!--            </div>-->
-                <!--            <div class="form-group">-->
-                <!--              <label for="message-text" class="col-form-label">Age:</label>-->
-                <!--              <textarea class="form-control" id="message-text"></textarea>-->
-                <!--            </div>-->
-              </form>
-              <div class="float-right">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Clear</button>
-                <button type="button" class="btn btn-primary ml-2">Save</button>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="card-header green">
-                <h3 class="card-title">Centers</h3>
-              </div>
-              <table class="table">
-                <thead>
-                <tr>
-                  <th>Center</th>
-                  <th>District</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }"
-                    (click)="getRecord(vbelt)">
-                  <td>{{vbelt.id}}</td>
-                  <td>{{vbelt.name}}</td>
-                  <td><button (click)="deleteRecord(vbelt.id)" class="btn btn-outline-danger border-0 pt-0"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-                </tr>
-                </tbody>
-              </table>
-              <div class="clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                  <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
-                </ul>
-              </div>
-            </div>
-          </div>
+        <div class="card-header green">
+          <h3 class="card-title">Centers</h3>
         </div>
+        <!-- /.card-header -->
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Center</th>
+            <th>District</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">
+            <td>{{vbelt.serialNo}}</td>
+            <td>{{vbelt.beltSize}}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-
+      <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+          <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
+        </ul>
+      </div>
       <!-- /.card-body -->
     </div>
   </section>

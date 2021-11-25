@@ -14,20 +14,15 @@
   <ul class="navbar-nav ml-auto">
     <!-- Messages Dropdown Menu -->
     <li class="nav-item dropdown">
-      <a class="nav-link" data-toggle="dropdown" href="#">
+      <a class="nav-link" (click)="logOut()" href="#">
         <i class="fa fa-power-off" aria-hidden="true"></i>
 <!--        <i class="far fa-comments"></i>-->
 <!--        <span class="badge badge-danger navbar-badge">3</span>-->
       </a>
-      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        <div class="m-2">
-          <div>User Name</div>
-          <button class="btn bg-dark">Log Out</button>
-        </div>
+<!--      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">-->
 <!--        <a href="#" class="dropdown-item">-->
-          <!-- Message Start -->
+<!--          &lt;!&ndash; Message Start &ndash;&gt;-->
 <!--          <div class="media">-->
-
 <!--            <img src="./assets/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">-->
 <!--            <div class="media-body">-->
 <!--              <h3 class="dropdown-item-title">-->
@@ -38,7 +33,7 @@
 <!--              <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>-->
 <!--            </div>-->
 <!--          </div>-->
-          <!-- Message End -->
+<!--          &lt;!&ndash; Message End &ndash;&gt;-->
 <!--        </a>-->
 <!--        <div class="dropdown-divider"></div>-->
 <!--        <a href="#" class="dropdown-item">-->
@@ -74,7 +69,7 @@
 <!--        </a>-->
 <!--        <div class="dropdown-divider"></div>-->
 <!--        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>-->
-      </div>
+<!--      </div>-->
     </li>
     <!-- Notifications Dropdown Menu -->
 <!--    <li class="nav-item dropdown">-->

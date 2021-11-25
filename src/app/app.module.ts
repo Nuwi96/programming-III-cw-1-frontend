@@ -28,6 +28,7 @@ import {PriceManagementComponent} from './views/price-management/price-managemen
 import { CenterDetailComponent } from './views/center-detail/center-detail.component';
 import {UsersComponent} from './views/users/users.component';
 import {VehicleComponent} from './views/vehicle/vehicle.component';
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {VehicleComponent} from './views/vehicle/vehicle.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    ToastrModule.forRoot(),
     SweetAlert2Module.forRoot(),
     NgxPaginationModule,
   ],
