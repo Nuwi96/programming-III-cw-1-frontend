@@ -11,7 +11,7 @@ export class FarmerService {
   }
 
   saveOrUpdate(farmerDTO: Farmer_dto): Observable<any> {
-    return this.http.post(BASE_URL + '', farmerDTO);
+    return this.http.post(BASE_URL + 'farmers' , farmerDTO);
   }
 
   getAllActiveFarmers(): Observable<any> {
@@ -21,8 +21,12 @@ export class FarmerService {
   getAllInActiveFarmers(): Observable<any> {
     return this.http.get(BASE_URL + 'farmers/all-inactive');
   }
-  // getFarmerById(registrationNo:number){
-  //   return this.http.get(BASE_URL + 'farmers/${registrationNo}');
-  // }
+
+  getFarmerById(registrationNo: number) {
+    return this.http.get(BASE_URL + 'farmers/' + registrationNo);
+  }
+  deleteById(registrationNo: number) {
+    return this.http.delete(BASE_URL + 'farmers/' + registrationNo);
+  }
 
 }

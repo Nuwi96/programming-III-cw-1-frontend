@@ -31,7 +31,8 @@ import {VehicleComponent} from './views/vehicle/vehicle.component';
 import {ToastrModule} from "ngx-toastr";
 import {FarmerService} from './services/farmer/farmer.service'
 import {authInterceptorProviders} from './helper/app.interceptor';
-
+import { ToastService, AngularToastifyModule } from 'angular-toastify';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,12 +64,14 @@ import {authInterceptorProviders} from './helper/app.interceptor';
     ToastrModule.forRoot(),
     SweetAlert2Module.forRoot(),
     NgxPaginationModule,
-
+    AngularToastifyModule,
+    BrowserAnimationsModule
   ],
   providers: [
     authInterceptorProviders,
     ItemService,
-    FarmerService
+    FarmerService,
+    ToastService
   ],
   bootstrap: [AppComponent]
 })
