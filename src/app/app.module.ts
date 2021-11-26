@@ -29,6 +29,8 @@ import { CenterDetailComponent } from './views/center-detail/center-detail.compo
 import {UsersComponent} from './views/users/users.component';
 import {VehicleComponent} from './views/vehicle/vehicle.component';
 import {ToastrModule} from "ngx-toastr";
+import {FarmerService} from './services/farmer/farmer.service'
+import {authInterceptorProviders} from './helper/app.interceptor';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,7 @@ import {ToastrModule} from "ngx-toastr";
     UsersComponent,
     VehicleComponent,
     PriceManagementComponent,
-    CenterDetailComponent
+    CenterDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,9 +63,12 @@ import {ToastrModule} from "ngx-toastr";
     ToastrModule.forRoot(),
     SweetAlert2Module.forRoot(),
     NgxPaginationModule,
+
   ],
   providers: [
-    ItemService
+    authInterceptorProviders,
+    ItemService,
+    FarmerService
   ],
   bootstrap: [AppComponent]
 })

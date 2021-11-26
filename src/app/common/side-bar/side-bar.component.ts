@@ -52,6 +52,17 @@ export class SideBarComponent implements OnInit {
             url: '/admin/orders'
           }
         ]
+      },{
+        header: null,
+        isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+        links: [
+          {
+            title: 'Farmers',
+            isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+            iconClass: 'nav-icon fas fa-chart-pie',
+            url: '/admin/customers'
+          }
+        ]
       }
     ];
 
