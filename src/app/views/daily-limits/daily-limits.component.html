@@ -28,7 +28,7 @@
                 <!--                <label for="exampleFormControlInput1">Choose a Date</label>-->
                 <mat-form-field appearance="fill" class="example-form-field col">
                   <mat-label>Choose a date</mat-label>
-                  <input matInput [matDatepicker]="datepicker">
+                  <input matInput [matDatepicker]="datepicker" [(ngModel)]="date" name="date">
                   <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                   <mat-datepicker #datepicker>
                     <!--                    <mat-datepicker-actions>-->
@@ -40,14 +40,14 @@
               </div>
               <div class="form-group">
                 <label for="buyingLimit">Buying Limit</label>
-                <input type="text" class="form-control" id="buyingLimit">
+                <input type="text" class="form-control" id="buyingLimit" [(ngModel)]="buyingLimit" name="buyingLimit">
               </div>
               <div class="form-group">
                 <label for="sellingLimit">Selling Limit</label>
-                <input type="text" class="form-control" id="sellingLimit">
+                <input type="text" class="form-control" id="sellingLimit" [(ngModel)]="sellingLimit" name="sellingLimit">
               </div>
               <div class="form-group">
-                <button class="btn bg-info">Save</button>
+                <button class="btn bg-info" (click)="save()">Save</button>
               </div>
             </form>
           </div>

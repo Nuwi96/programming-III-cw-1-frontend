@@ -43,6 +43,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatNativeDateModule} from '@angular/material/core';
+import {Daily_limitService} from './services/dily-limit/daily_limit.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +91,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     authInterceptorProviders,
     ItemService,
     FarmerService,
-    ToastService
+    ToastService,
+    Daily_limitService
   ],
   bootstrap: [AppComponent]
 })
