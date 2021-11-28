@@ -1,0 +1,63 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Add Daily Limits for Buying price and selling price</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="['/admin/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Daily Limits for Buying price and selling price</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <form>
+              <div class="form-group">
+                <!--                <label for="exampleFormControlInput1">Choose a Date</label>-->
+                <mat-form-field appearance="fill" class="example-form-field col">
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [matDatepicker]="datepicker">
+                  <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker>
+                    <!--                    <mat-datepicker-actions>-->
+                    <!--                      <button mat-button matDatepickerCancel>Cancel</button>-->
+                    <!--                      <button mat-raised-button color="primary" matDatepickerApply>Apply</button>-->
+                    <!--                    </mat-datepicker-actions>-->
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <label for="buyingLimit">Buying Limit</label>
+                <input type="text" class="form-control" id="buyingLimit">
+              </div>
+              <div class="form-group">
+                <label for="sellingLimit">Selling Limit</label>
+                <input type="text" class="form-control" id="sellingLimit">
+              </div>
+              <div class="form-group">
+                <button class="btn bg-info">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+

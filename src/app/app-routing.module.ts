@@ -18,6 +18,8 @@ import {UsersComponent} from './views/users/users.component';
 import {VehicleComponent} from './views/vehicle/vehicle.component';
 import {AuthGuard} from './guard/auth/auth.guard';
 import {RoleGuard} from "./guard/role/role.guard";
+import {ConfigurationScreenComponent} from './views/configuration-screen/configuration-screen.component';
+import {DailyLimitsComponent} from './views/daily-limits/daily-limits.component';
 
 const routes: Routes = [
   {
@@ -44,6 +46,8 @@ const routes: Routes = [
       { path: 'center-details', component: CenterDetailComponent },
       { path: 'users', component: UsersComponent },
       { path: 'vehicle', component: VehicleComponent },
+      { path: 'configuration-screen', component: ConfigurationScreenComponent },
+      { path: 'daily-limit', component: DailyLimitsComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },

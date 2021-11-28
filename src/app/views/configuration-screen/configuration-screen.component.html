@@ -1,0 +1,52 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Add Daily Limits for Centers</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="['/admin/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Configuration Screen</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="card">
+      <div class="card-body">
+        <div>
+          <div class="row">
+            <div class="col-4">
+              <select (change)="centerChange($event)" name="center" id="center" class="form-control">
+                <option value="">Select a Center</option>
+                <option value="1">Center 01</option>
+              </select>
+            </div>
+            <div class="col-2 m-2">
+              <section class="example-section">
+                <b>False</b>
+                <mat-slide-toggle
+                  class="example-margin"
+                  [color]="color"
+                  [checked]="checked"
+                  (change)="change($event)">
+                  True
+                </mat-slide-toggle>
+              </section>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+
