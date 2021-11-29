@@ -63,6 +63,50 @@ export class SideBarComponent implements OnInit {
             url: '/admin/customers'
           }
         ]
+      },{
+        header: null,
+        isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+        links: [
+          {
+            title: 'Paddy collection',
+            isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+            iconClass: 'nav-icon fa-sitemap fas',
+            url: '/admin/paddy/add-item',
+          }
+        ]
+      },{
+        header: null,
+        isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+        links: [
+          {
+            title: 'Centers',
+            isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+            iconClass: 'nav-icon fas fa-chart-pie',
+            url: '/admin/center-details'
+          }
+        ]
+      },{
+        header: null,
+        isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+        links: [
+          {
+            title: 'Configuration Screen',
+            isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+            iconClass: 'nav-icon fas fa-chart-pie',
+            url: '/admin/configuration-screen'
+          }
+        ]
+      },{
+        header: null,
+        isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+        links: [
+          {
+            title: 'Daily Limit',
+            isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+            iconClass: 'nav-icon fas fa-chart-pie',
+            url: '/admin/daily-limit'
+          }
+        ]
       }
     ];
 

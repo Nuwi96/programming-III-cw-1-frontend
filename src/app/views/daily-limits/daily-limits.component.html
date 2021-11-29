@@ -1,0 +1,125 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Add Daily Limits for Buying price and selling price</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="['/admin/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Daily Limits for Buying Limit and selling Limit</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <form>
+              <div class="form-group">
+                <mat-form-field appearance="fill" class="example-form-field col">
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [matDatepicker]="datepicker" [(ngModel)]="date" name="date"
+                         (dateChange)="change($event)">
+                  <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker>
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <label for="buyingLimit">Buying Limit</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="buyingLimit" [(ngModel)]="buyingLimit" name="buyingLimit"
+                         autocomplete="off">
+                  <div class="input-group-append">
+                    <span class="input-group-text">Kg</span>
+                  </div>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label for="sellingLimit">Selling Limit</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="sellingLimit" [(ngModel)]="sellingLimit" name="sellingLimit"
+                         autocomplete="off">
+                  <div class="input-group-append">
+                    <span class="input-group-text">Kg</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="sellingLimit">Buying Price</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Rs</span>
+                  </div>
+                  <input type="number" name="buyingPrice" id="buyingPrice" [(ngModel)]="buyingPrice" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="sellingLimit">Selling Price</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Rs</span>
+                  </div>
+                  <input type="number" name="sellingPrice" id="sellingPrice" [(ngModel)]="sellingPrice" class="form-control">
+                </div>
+              </div>
+              <div class="form-group float-right">
+                <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal" (click)="clear()">Clear</button>
+                <button class="btn bg-info" (click)="save()">Save</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-6">
+            <div class="card-header green">
+              <h3 class="card-title">All Daily Limits</h3>
+            </div>
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Date</th>
+                <th>Buying Limit</th>
+                <th>Selling Limit</th>
+                <th>Buying Price</th>
+                <th>Selling Price</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngIf="0 === tableData.length">
+                <td colspan="5" class="text-center">No Data Available</td>
+              </tr>
+              <tr *ngFor="let data of tableData | paginate: { itemsPerPage: 10, currentPage: pVbelt }"
+                  (click)="getRecord(data)">
+                <td>{{data.date}}</td>
+                <td>{{data.buying_limit}}</td>
+                <td>{{data.selling_limit}}</td>
+                <td>{{data.buying_price}}</td>
+                <td>{{data.selling_price}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="clearfix">
+              <ul class="pagination pagination-sm m-0 float-right">
+                <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+

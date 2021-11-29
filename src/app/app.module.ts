@@ -33,6 +33,20 @@ import {FarmerService} from './services/farmer/farmer.service'
 import {authInterceptorProviders} from './helper/app.interceptor';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ConfigurationScreenComponent } from './views/configuration-screen/configuration-screen.component';
+// import {MatSlideToggleModule, MatCheckboxModule} from '@angular/material'
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { DailyLimitsComponent } from './views/daily-limits/daily-limits.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatNativeDateModule} from '@angular/material/core';
+import {Daily_limitService} from './services/dily-limit/daily_limit.service';
+import { DatePipe } from '@angular/common';
+import {CenterService} from './services/center/center.service';
+import {PaddyService} from './services/paddy/paddy.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +69,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     VehicleComponent,
     PriceManagementComponent,
     CenterDetailComponent,
+    ConfigurationScreenComponent,
+    DailyLimitsComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,13 +81,24 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     SweetAlert2Module.forRoot(),
     NgxPaginationModule,
     AngularToastifyModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatButtonModule,
+    MatNativeDateModule,
   ],
   providers: [
     authInterceptorProviders,
     ItemService,
     FarmerService,
-    ToastService
+    ToastService,
+    Daily_limitService,
+    DatePipe,
+    CenterService,
+    PaddyService
   ],
   bootstrap: [AppComponent]
 })

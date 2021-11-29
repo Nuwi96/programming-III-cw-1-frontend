@@ -1,14 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Item} from '../../../dto/item';
-import {ItemService} from '../../../services/item.service';
-import {Brand} from '../../../dto/brand';
-import {MachineType} from '../../../dto/machine_type';
-import {NgForm} from '@angular/forms';
-import Swal from 'sweetalert2';
-import {Needle} from '../../../dto/needle';
-import {Vbelt} from '../../../dto/vbelt';
-import {Foot} from '../../../dto/foot';
-
+import {PaddyService} from '../../../services/paddy/paddy.service';
+import {FarmerService} from '../../../services/farmer/farmer.service';
+import {Paddy_dto} from '../../../dto/paddy_dto';
+import {ToastrService} from 'ngx-toastr';
+import {Daily_limitService} from '../../../services/dily-limit/daily_limit.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-add-items',
@@ -19,131 +16,129 @@ import {Foot} from '../../../dto/foot';
 
 export class AddItemsComponent implements OnInit {
 
-  selectedOption: string;
+  selectedOption: string = '';
   item: Item = new Item();
-  needle: Needle = new Needle();
-  vBelt: Vbelt = new Vbelt();
-  foot: Foot = new Foot();
-  brands: Array<Brand> = [];
-  machineTypes: Array<MachineType> = [];
-  selectedBrand: Brand = new Brand();
-  selectedMachineType: MachineType = new MachineType();
-  @ViewChild('frmItems') frmCustomers: NgForm;
-
-  constructor(private itemService: ItemService) { }
+  items: any;
+  pItem: string | number;
+  tableData: any;
+  farmers: any[];
+  pVbelt: string | number;
+  regNo: number = 0;
+  id:number = 0;
+  farmerId :number = 0;
+  stockedDate:Date = new Date()
+  weight:number = 0;
+  paidAmount:number = 0;
+  buyingPrice:number = 0
+  constructor(private paddyService: PaddyService,private farmerService: FarmerService,private dailyLimitService: Daily_limitService,
+              private toastr: ToastrService,private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    this.selectedOption = '';
-    this.getInitialData();
+    this.getAllFarmer()
+    this.getAllRecords()
+    this.calculatePaidAmount()
   }
 
-  saveItem(): void {
-    this.item.brand = this.selectedBrand;
-    this.item.machineType = this.selectedMachineType;
+  getAllFarmer() {
+    this.farmerService.getAllActiveFarmers()
+      .subscribe(response => {
+        this.farmers = response;
+        }, () => {
+          this.error();
+        }
+      );
+  }
+  getAllRecords() {
+    this.paddyService.getAllPaddy()
+      .subscribe(response => {
+        this.tableData = response;
+        }, () => {
+          this.error();
+        }
+      );
+  }
+  getRecordsById() {
+    this.paddyService.getFarmerById(this.farmerId)
+      .subscribe(response => {
+        this.tableData = [response];
+        }, () => {
+          this.error();
+        }
+      );
+  }
 
-    this.itemService.saveItem(this.item).subscribe(value => {
-      if (value) {
-        Swal.fire(
-          'Successful!',
-          'Item Added Successfully!',
-          'success'
-        ).then(value1 => {
-          this.clear();
+  getRecord(record: any) {
+    this.regNo = record.id;
+    this.farmerId = record.farmerId;
+    this.stockedDate = record.stockedDate;
+    this.weight = record.weight;
+    this.paidAmount = record.paidAmount;
+  }
+
+  clear() {
+    this.regNo = 0;
+    this.farmerId =0;
+    this.stockedDate = new Date();
+    this.weight = 0;
+    this.paidAmount = 0;
+    this.getAllRecords();
+  }
+
+  save() {
+    const dataDto: Paddy_dto = {
+      id: !this.regNo ? 0 : this.regNo,
+      farmerId: this.farmerId,
+      stockedDate: this.stockedDate,
+      weight: this.weight,
+      paidAmount: this.paidAmount,
+
+    };
+    this.paddyService.saveOrUpdate(dataDto)
+      .subscribe(response => {
+        this.toastr.success('Updated Successfully', '', {
+          timeOut: 2000,
+          positionClass: 'toast-top-right'
         });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        });
-      }
+        this.clear();
+        this.getAllRecords();
+      }, () => {
+        this.error();
+      });
+
+  }
+
+  calculatePaidAmount(){
+    var date = this.datePipe.transform(this.stockedDate, 'yyyy-MM-dd');
+    this.dailyLimitService.getAllRecordsByDate(date)
+      .subscribe(response => {
+        this.buyingPrice = response[0].buying_price
+        }, () => {
+          this.error();
+        }
+      );
+  }
+
+  error() {
+    this.toastr.error('Something Went wrong', '', {
+      timeOut: 2000,
+      positionClass: 'toast-top-right'
     });
   }
 
-  saveNeedle(): void {
-    this.needle.brand = this.selectedBrand;
-
-    this.itemService.saveNeedle(this.needle).subscribe(value => {
-      if (value) {
-        Swal.fire(
-          'Successful!',
-          'Item Added Successfully!',
-          'success'
-        ).then(value1 => {
-          this.clear();
-        });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        });
-      }
-    });
-  }
-
-  saveVBelt(): void {
-
-    this.itemService.saveVBelt(this.vBelt).subscribe(value => {
-      if (value) {
-        Swal.fire(
-          'Successful!',
-          'Item Added Successfully!',
-          'success'
-        ).then(value1 => {
-          this.clear();
-        });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        });
-      }
-    });
-  }
-
-  saveFoot(): void {
-    this.itemService.saveFoot(this.foot).subscribe(value => {
-      if (value) {
-        Swal.fire(
-          'Successful!',
-          'Item Added Successfully!',
-          'success'
-        ).then(value1 => {
-          this.clear();
-        });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        });
-      }
-    });
-  }
-
-  getInitialData(): void {
-
-    this.itemService.getBrands().subscribe(value => {
-      this.brands = value;
-    });
-
-    this.itemService.getMachineTypes().subscribe(value => {
-      this.machineTypes = value;
-    });
+  change() {
+    if('0' !== this.farmerId.toString()){
+      this.getRecordsById()
+    }else {
+      this.getAllRecords()
+    }
 
   }
 
-  clear(): void {
-    this.item = new Item();
-    this.selectedBrand = new Brand();
-    this.selectedMachineType = new MachineType();
+  onChange(value: any) {
+    this.paidAmount = this.buyingPrice * this.weight
   }
 
-  log(): void {
-    console.log(this.selectedBrand);
-    console.log(this.selectedMachineType);
+  dateChange($event: any) {
+    this.calculatePaidAmount()
   }
-
 }
