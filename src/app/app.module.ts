@@ -44,6 +44,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatNativeDateModule} from '@angular/material/core';
 import {Daily_limitService} from './services/dily-limit/daily_limit.service';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,14 +86,15 @@ import {Daily_limitService} from './services/dily-limit/daily_limit.service';
     MatDatepickerModule,
     MatInputModule,
     MatButtonModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   providers: [
     authInterceptorProviders,
     ItemService,
     FarmerService,
     ToastService,
-    Daily_limitService
+    Daily_limitService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

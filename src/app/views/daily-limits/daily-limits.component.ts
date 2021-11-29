@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
 import {Daily_limitService} from '../../services/dily-limit/daily_limit.service';
 import {Daily_limit_dto} from '../../dto/daily_limit_dto';
 import {ToastrService} from 'ngx-toastr';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-daily-limits',
@@ -11,36 +11,28 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class DailyLimitsComponent implements OnInit {
 
-  campaignOne: FormGroup;
-  campaignTwo: FormGroup;
-  sellingLimit: number;
-  buyingLimit: number;
+  sellingLimit: number = 0;
+  buyingLimit: number = 0;
+
   date: Date = new Date();
+  tableData: any[];
+  pVbelt: string | number = 1;
+  pipe = new DatePipe('en-US');
+  now = Date.now();
 
-  constructor(private daily_limitService: Daily_limitService, private toastr: ToastrService) {
-    const today = new Date();
-    const month = today.getMonth();
-    const year = today.getFullYear();
+  constructor(private daily_limitService: Daily_limitService, private toastr: ToastrService, private datePipe: DatePipe) {
 
-    this.campaignOne = new FormGroup({
-      start: new FormControl(new Date(year, month, 13)),
-      end: new FormControl(new Date(year, month, 16)),
-    });
-
-    this.campaignTwo = new FormGroup({
-      start: new FormControl(new Date(year, month, 15)),
-      end: new FormControl(new Date(year, month, 19)),
-    });
   }
 
   ngOnInit(): void {
-    this.getAllRecords();
+    this.getAllRecordsByDate();
   }
 
-  getAllRecords() {
-    this.daily_limitService.getAllRecords()
+  getAllRecordsByDate() {
+    var date = this.datePipe.transform(this.date, 'yyyy-MM-dd');
+    this.daily_limitService.getAllRecordsByDate(date)
       .subscribe(response => {
-          console.log(response);
+          this.tableData = response;
         }, () => {
 
         }
@@ -48,23 +40,31 @@ export class DailyLimitsComponent implements OnInit {
   }
 
   save() {
-    const dataDto: Daily_limit_dto = {
-      id: 0,
-      buying_limit: this.buyingLimit,
-      selling_limit: this.sellingLimit,
-      date: this.date,
-    };
-    console.log(dataDto);
-    this.daily_limitService.saveOrUpdate(dataDto)
-      .subscribe(response => {
-        this.toastr.success('Limit Added Successfully', '', {
-          timeOut: 2000,
-          positionClass: 'toast-top-right'
-        });
-        this.clear();
-      }, () => {
-        this.error();
+    if (0 === this.buyingLimit || 0 === this.sellingLimit) {
+      this.toastr.error('Please fill all the fields', '', {
+        timeOut: 2000,
+        positionClass: 'toast-top-right'
       });
+    } else {
+      const dataDto: Daily_limit_dto = {
+        id: 0,
+        buying_limit: this.buyingLimit,
+        selling_limit: this.sellingLimit,
+        date: this.date,
+      };
+      this.daily_limitService.saveOrUpdate(dataDto)
+        .subscribe(response => {
+          this.toastr.success('Limit Added Successfully', '', {
+            timeOut: 2000,
+            positionClass: 'toast-top-right'
+          });
+          this.getAllRecordsByDate();
+          this.clear();
+        }, () => {
+          this.error();
+        });
+
+    }
 
   }
 
@@ -79,5 +79,15 @@ export class DailyLimitsComponent implements OnInit {
       timeOut: 2000,
       positionClass: 'toast-top-right'
     });
+  }
+
+  getRecord(data: any) {
+    this.sellingLimit = data.selling_limit;
+    this.buyingLimit = data.buying_limit;
+  }
+
+  change(event) {
+    this.date = event.value;
+    this.getAllRecordsByDate();
   }
 }

@@ -27,7 +27,8 @@
               <div class="form-group">
                 <mat-form-field appearance="fill" class="example-form-field col">
                   <mat-label>Choose a date</mat-label>
-                  <input matInput [matDatepicker]="datepicker" [(ngModel)]="date" name="date">
+                  <input matInput [matDatepicker]="datepicker" [(ngModel)]="date" name="date"
+                         (dateChange)="change($event)">
                   <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                   <mat-datepicker #datepicker>
                   </mat-datepicker>
@@ -35,16 +36,48 @@
               </div>
               <div class="form-group">
                 <label for="buyingLimit">Buying Limit</label>
-                <input type="text" class="form-control" id="buyingLimit" [(ngModel)]="buyingLimit" name="buyingLimit" autocomplete="off">
+                <input type="number" class="form-control" id="buyingLimit" [(ngModel)]="buyingLimit" name="buyingLimit"
+                       autocomplete="off">
               </div>
               <div class="form-group">
                 <label for="sellingLimit">Selling Limit</label>
-                <input type="text" class="form-control" id="sellingLimit" [(ngModel)]="sellingLimit" name="sellingLimit" autocomplete="off">
+                <input type="number" class="form-control" id="sellingLimit" [(ngModel)]="sellingLimit" name="sellingLimit"
+                       autocomplete="off">
               </div>
               <div class="form-group">
                 <button class="btn bg-info" (click)="save()">Save</button>
               </div>
             </form>
+          </div>
+          <div class="col-6">
+            <div class="card-header green">
+              <h3 class="card-title">All Daily Limits</h3>
+            </div>
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Date</th>
+                <th>Buying Limit</th>
+                <th>Selling Limit</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngIf="!tableData.length">
+                <td colspan="3" class="text-center">No Data Available</td>
+              </tr>
+              <tr *ngFor="let data of tableData | paginate: { itemsPerPage: 10, currentPage: pVbelt }"
+                  (click)="getRecord(data)">
+                <td>{{data.date}}</td>
+                <td>{{data.buying_limit}}</td>
+                <td>{{data.selling_limit}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="clearfix">
+              <ul class="pagination pagination-sm m-0 float-right">
+                <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
+              </ul>
+            </div>
           </div>
         </div>
         <div>
