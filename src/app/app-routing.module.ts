@@ -29,7 +29,7 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'customers', component: CustomerComponent },
-      { path: 'items', component: ItemComponent,
+      { path: 'paddy', component: ItemComponent,
         children: [
           { path: 'add-item', component: AddItemsComponent },
           { path: 'edit-item', component: EditItemsComponent },

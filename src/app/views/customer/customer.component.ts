@@ -47,18 +47,17 @@ export class CustomerComponent implements OnInit {
   }
 
   deleteRecord(id: any) {
-    this.clear();
     this.farmerService.deleteById(id)
       .subscribe(response => {
         this.toastr.success('Deleted Successfully', '', {
           timeOut: 2000,
           positionClass: 'toast-top-right'
         });
+        this.clear();
         this.getAllFarmer();
       }, () => {
         this.error();
       });
-    console.log('del record', id);
   }
 
   clear() {

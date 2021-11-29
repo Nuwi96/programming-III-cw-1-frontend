@@ -45,6 +45,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatNativeDateModule} from '@angular/material/core';
 import {Daily_limitService} from './services/dily-limit/daily_limit.service';
 import { DatePipe } from '@angular/common';
+import {CenterService} from './services/center/center.service';
+import {PaddyService} from './services/paddy/paddy.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +96,9 @@ import { DatePipe } from '@angular/common';
     FarmerService,
     ToastService,
     Daily_limitService,
-    DatePipe
+    DatePipe,
+    CenterService,
+    PaddyService
   ],
   bootstrap: [AppComponent]
 })
