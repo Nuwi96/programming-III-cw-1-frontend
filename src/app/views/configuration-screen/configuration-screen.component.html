@@ -24,22 +24,43 @@
         <div>
           <div class="row">
             <div class="col-4">
-              <select (change)="centerChange($event)" name="center" id="center" class="form-control">
-                <option value="">Select a Center</option>
-                <option value="1">Center 01</option>
-              </select>
+              <form action="">
+                <div class="form-group">
+                  <label>Center</label>
+                  <div class="input-group">
+                    <select selected="selected" [(ngModel)]="centedID" (change)="centerChange()" name="center" id="center" class="form-control">
+                      <option value="0">Select a Center</option>
+                      <option *ngFor="let data of centers" [ngValue]="data.registrationId">
+                        {{ data.name  }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Add Paddy Limit</label>
+                  <div class="input-group">
+                    <section class="example-section">
+                      <b>False</b>
+                      <mat-slide-toggle
+                        class="example-margin"
+                        [color]="color"
+                        [checked]="checked"
+                        (change)="change($event)">
+                        True
+                      </mat-slide-toggle>
+                    </section>
+                  </div>
+                </div>
+                <div class="float-right">
+                  <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal" (click)="clear()">Clear
+                  </button>
+                  <button type="submit" class="btn btn-primary" (click)="save()">Submit</button>
+                </div>
+              </form>
+
             </div>
             <div class="col-2 m-2">
-              <section class="example-section">
-                <b>False</b>
-                <mat-slide-toggle
-                  class="example-margin"
-                  [color]="color"
-                  [checked]="checked"
-                  (change)="change($event)">
-                  True
-                </mat-slide-toggle>
-              </section>
+
             </div>
           </div>
         </div>

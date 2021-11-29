@@ -13,9 +13,11 @@ export class DailyLimitsComponent implements OnInit {
 
   sellingLimit: number = 0;
   buyingLimit: number = 0;
+  sellingPrice: number = 0;
+  buyingPrice: number = 0;
 
   date: Date = new Date();
-  tableData: any[];
+  tableData: any[] = [];
   pVbelt: string | number = 1;
   pipe = new DatePipe('en-US');
   now = Date.now();
@@ -50,7 +52,10 @@ export class DailyLimitsComponent implements OnInit {
         id: 0,
         buying_limit: this.buyingLimit,
         selling_limit: this.sellingLimit,
-        date: this.date,
+        date: this.datePipe.transform(this.date, 'yyyy-MM-dd'),
+        buying_price: this.buyingPrice,
+        selling_price: this.sellingPrice,
+
       };
       this.daily_limitService.saveOrUpdate(dataDto)
         .subscribe(response => {
@@ -72,6 +77,9 @@ export class DailyLimitsComponent implements OnInit {
     this.sellingLimit = 0;
     this.buyingLimit = 0;
     this.date = new Date();
+    this.sellingPrice = 0;
+    this.buyingPrice = 0;
+    this.getAllRecordsByDate();
   }
 
   error() {
@@ -84,6 +92,8 @@ export class DailyLimitsComponent implements OnInit {
   getRecord(data: any) {
     this.sellingLimit = data.selling_limit;
     this.buyingLimit = data.buying_limit;
+    this.sellingPrice = data.selling_price;
+    this.buyingPrice = data.buying_price;
   }
 
   change(event) {
