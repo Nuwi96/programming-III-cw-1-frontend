@@ -64,6 +64,7 @@ export class ConfigurationScreenComponent implements OnInit {
   }
 
   save() {
+    if (0 !== this.centedID) {
     const dataDto: Center_dto = {
       registrationId: !this.centedID ? 0 : this.centedID,
       paddyLimited: this.checked,
@@ -83,5 +84,11 @@ export class ConfigurationScreenComponent implements OnInit {
       }, () => {
         this.error();
       });
+    } else {
+      this.toastr.error('Please Fill All the Required Fields', '', {
+        timeOut: 2000,
+        positionClass: 'toast-top-right'
+      });
+    }
   }
 }
