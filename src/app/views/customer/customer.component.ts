@@ -71,16 +71,18 @@ export class CustomerComponent implements OnInit {
   }
 
   save() {
-    const dataDto: Farmer_dto = {
-      registrationNo: !this.regNo ? 0 : this.regNo,
-      centerId: this.centers,
-      firstName: this.firstName,
-      middleName: this.middleName,
-      lastName: this.lastName,
-      address: this.address,
-      age: this.farmerAge,
-      isActive: 1,
-    };
+    if ('' !== this.firstName &&  '' !== this.middleName &&
+      '' !== this.lastName &&   '' !== this.address &&  0 !== this.farmerAge) {
+      const dataDto: Farmer_dto = {
+        registrationNo: !this.regNo ? 0 : this.regNo,
+        centerId: this.centers,
+        firstName: this.firstName,
+        middleName: this.middleName,
+        lastName: this.lastName,
+        address: this.address,
+        age: this.farmerAge,
+        isActive: 1,
+      };
     this.farmerService.saveOrUpdate(dataDto)
       .subscribe(response => {
         this.toastr.success('Updated Successfully', '', {
@@ -92,6 +94,12 @@ export class CustomerComponent implements OnInit {
       }, () => {
         this.error();
       });
+    }else{
+      this.toastr.error('Please Fill All the Required Fields', '', {
+        timeOut: 2000,
+        positionClass: 'toast-top-right'
+      });
+    }
 
   }
 

@@ -34,26 +34,34 @@ export class CenterDetailComponent implements OnInit {
   }
 
   save() {
-    const dataDto: Center_dto = {
-      registrationId: !this.regNo ? 0 : this.regNo,
-      paddyLimited: false,
-      name: this.name,
-      capacity: this.capacity,
-      latitude: this.latitude,
-      longitude: this.longitude,
-      isActive: 1,
-    };
-    this.centerService.saveOrUpdate(dataDto)
-      .subscribe(response => {
-        this.toastr.success('Updated Successfully', '', {
-          timeOut: 2000,
-          positionClass: 'toast-top-right'
+    if ('' !== this.name &&
+      0 !== this.capacity && 0 !== this.latitude && 0 !== this.longitude) {
+      const dataDto: Center_dto = {
+        registrationId: !this.regNo ? 0 : this.regNo,
+        paddyLimited: false,
+        name: this.name,
+        capacity: this.capacity,
+        latitude: this.latitude,
+        longitude: this.longitude,
+        isActive: 1,
+      };
+      this.centerService.saveOrUpdate(dataDto)
+        .subscribe(response => {
+          this.toastr.success('Updated Successfully', '', {
+            timeOut: 2000,
+            positionClass: 'toast-top-right'
+          });
+          this.clear();
+          this.getAllCenters();
+        }, () => {
+          this.error();
         });
-        this.clear();
-        this.getAllCenters();
-      }, () => {
-        this.error();
+    } else {
+      this.toastr.error('Please Fill All the Required Fields', '', {
+        timeOut: 2000,
+        positionClass: 'toast-top-right'
       });
+    }
   }
 
 

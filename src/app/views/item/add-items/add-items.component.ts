@@ -24,43 +24,47 @@ export class AddItemsComponent implements OnInit {
   farmers: any[];
   pVbelt: string | number;
   regNo: number = 0;
-  id:number = 0;
-  farmerId :number = 0;
-  stockedDate:Date = new Date()
-  weight:number = 0;
-  paidAmount:number = 0;
-  buyingPrice:number = 0
-  constructor(private paddyService: PaddyService,private farmerService: FarmerService,private dailyLimitService: Daily_limitService,
-              private toastr: ToastrService,private datePipe: DatePipe) { }
+  id: number = 0;
+  farmerId: number = 0;
+  stockedDate: Date = new Date();
+  weight: number = 0;
+  paidAmount: number = 0;
+  buyingPrice: number = 0;
+
+  constructor(private paddyService: PaddyService, private farmerService: FarmerService, private dailyLimitService: Daily_limitService,
+              private toastr: ToastrService, private datePipe: DatePipe) {
+  }
 
   ngOnInit(): void {
-    this.getAllFarmer()
-    this.getAllRecords()
-    this.calculatePaidAmount()
+    this.getAllFarmer();
+    this.getAllRecords();
+    this.calculatePaidAmount();
   }
 
   getAllFarmer() {
     this.farmerService.getAllActiveFarmers()
       .subscribe(response => {
-        this.farmers = response;
+          this.farmers = response;
         }, () => {
           this.error();
         }
       );
   }
+
   getAllRecords() {
     this.paddyService.getAllPaddy()
       .subscribe(response => {
-        this.tableData = response;
+          this.tableData = response;
         }, () => {
           this.error();
         }
       );
   }
+
   getRecordsById() {
     this.paddyService.getFarmerById(this.farmerId)
       .subscribe(response => {
-        this.tableData = [response];
+          this.tableData = [response];
         }, () => {
           this.error();
         }
@@ -77,7 +81,7 @@ export class AddItemsComponent implements OnInit {
 
   clear() {
     this.regNo = 0;
-    this.farmerId =0;
+    this.farmerId = 0;
     this.stockedDate = new Date();
     this.weight = 0;
     this.paidAmount = 0;
@@ -85,33 +89,40 @@ export class AddItemsComponent implements OnInit {
   }
 
   save() {
-    const dataDto: Paddy_dto = {
-      id: !this.regNo ? 0 : this.regNo,
-      farmerId: this.farmerId,
-      stockedDate: this.stockedDate,
-      weight: this.weight,
-      paidAmount: this.paidAmount,
+    if (0 !== this.farmerId &&
+      0 !== this.weight && 0 !== this.paidAmount) {
+      const dataDto: Paddy_dto = {
+        id: !this.regNo ? 0 : this.regNo,
+        farmerId: this.farmerId,
+        stockedDate: this.stockedDate,
+        weight: this.weight,
+        paidAmount: this.paidAmount,
 
-    };
-    this.paddyService.saveOrUpdate(dataDto)
-      .subscribe(response => {
-        this.toastr.success('Updated Successfully', '', {
-          timeOut: 2000,
-          positionClass: 'toast-top-right'
+      };
+      this.paddyService.saveOrUpdate(dataDto)
+        .subscribe(response => {
+          this.toastr.success('Updated Successfully', '', {
+            timeOut: 2000,
+            positionClass: 'toast-top-right'
+          });
+          this.clear();
+          this.getAllRecords();
+        }, () => {
+          this.error();
         });
-        this.clear();
-        this.getAllRecords();
-      }, () => {
-        this.error();
+    } else {
+      this.toastr.error('Please Fill All the Required Fields', '', {
+        timeOut: 2000,
+        positionClass: 'toast-top-right'
       });
-
+    }
   }
 
-  calculatePaidAmount(){
+  calculatePaidAmount() {
     var date = this.datePipe.transform(this.stockedDate, 'yyyy-MM-dd');
     this.dailyLimitService.getAllRecordsByDate(date)
       .subscribe(response => {
-        this.buyingPrice = response[0].buying_price
+          this.buyingPrice = response[0].buying_price;
         }, () => {
           this.error();
         }
@@ -126,19 +137,19 @@ export class AddItemsComponent implements OnInit {
   }
 
   change() {
-    if('0' !== this.farmerId.toString()){
-      this.getRecordsById()
-    }else {
-      this.getAllRecords()
+    if ('0' !== this.farmerId.toString()) {
+      this.getRecordsById();
+    } else {
+      this.getAllRecords();
     }
 
   }
 
   onChange(value: any) {
-    this.paidAmount = this.buyingPrice * this.weight
+    this.paidAmount = this.buyingPrice * this.weight;
   }
 
   dateChange($event: any) {
-    this.calculatePaidAmount()
+    this.calculatePaidAmount();
   }
 }
