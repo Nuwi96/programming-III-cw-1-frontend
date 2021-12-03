@@ -19,83 +19,158 @@
 
   <!-- Main content -->
   <section class="content">
-    <div class="card">
-      <div class="card-body p-0">
-        <div class="card-footer clearfix">
-          <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#exampleModal"><i
-            class="fas fa-plus"></i> Add
-          </button>
+    <div class="row">
+      <div class="col-4">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Add Users</h3>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="user-name" class="col-form-label font-weight-normal">User Name</label>
+                <input type="text" class="form-control" name="userName" [(ngModel)]="userName" id="user-name">
+              </div>
+              <div class="form-group">
+                <label for="email" class="col-form-label font-weight-normal">Email</label>
+                <input type="email" class="form-control" name="email" [(ngModel)]="email" id="email">
+              </div>
+              <div class="form-group">
+                <label for="role" class="col-form-label font-weight-normal">Role</label>
+                <div id="role">
+                  <div class="custom-control custom-radio">
+                    <input [(ngModel)]="role" class="custom-control-input" checked id="head-office"
+                           name="permission"
+                           type="radio"
+                           value="head-office">
+                    <label for="head-office" class="custom-control-label">Head Office Manager</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input [(ngModel)]="role" class="custom-control-input" id="paying-officer"
+                           name="permission"
+                           type="radio" value="paying-officer">
+                    <label for="paying-officer" class="custom-control-label">Paying Manager</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input [(ngModel)]="role" class="custom-control-input" id="center-manager"
+                           name="permission"
+                           type="radio" value="center-manager">
+                    <label for="center-manager" class="custom-control-label">Center Manager</label>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="role === 'center-manager' || role === 'paying-officer'" class="form-group">
+                <label for="centers" class="col-form-label">Center ID:</label>
+                <select class="form-control" [(ngModel)]="selectedCenter" name="centers" id="centers">
+                  <option *ngFor="let center of centers"
+                          [value]="center.registrationId">{{center.registrationId + ' - ' + center.name}}</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+          </div>
         </div>
-        <div class="card-header green">
-          <h3 class="card-title">All Users</h3>
+      </div>
+      <div class="col-8">
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="card-header green">
+              <h3 class="card-title">All Users</h3>
+            </div>
+            <!-- /.card-header -->
+            <table class="table">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th>#</th>
+                <th>#</th>
+              </tr>
+              </thead>
+              <tbody>
+              <!--          <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">-->
+              <!--            <td>{{vbelt.serialNo}}</td>-->
+              <!--            <td>{{vbelt.beltSize}}</td>-->
+              <!--            <td>{{vbelt.beltName}}</td>-->
+              <!--            <td>{{vbelt.qtyOnHand}}</td>-->
+              <!--            <td>{{vbelt.sellingPrice}}</td>-->
+              <!--          </tr>-->
+              </tbody>
+            </table>
+          </div>
+          <!--      <div class="card-footer clearfix">-->
+          <!--        <ul class="pagination pagination-sm m-0 float-right">-->
+          <!--          <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>-->
+          <!--        </ul>-->
+          <!--      </div>-->
+          <!-- /.card-body -->
         </div>
-        <!-- /.card-header -->
-        <table class="table">
-          <thead>
-          <tr>
-            <th>ID</th>
-            <th>Role</th>
-            <th>Email</th>
-            <th>#</th>
-            <th>#</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">
-            <td>{{vbelt.serialNo}}</td>
-            <td>{{vbelt.beltSize}}</td>
-            <td>{{vbelt.beltName}}</td>
-            <td>{{vbelt.qtyOnHand}}</td>
-            <td>{{vbelt.sellingPrice}}</td>
-          </tr>
-          </tbody>
-        </table>
       </div>
-      <div class="card-footer clearfix">
-        <ul class="pagination pagination-sm m-0 float-right">
-          <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
-        </ul>
-      </div>
-      <!-- /.card-body -->
     </div>
   </section>
   <!-- /.content -->
   <!--  modal-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-       aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Add New User</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="name" class="col-form-label font-weight-normal">Role:</label>
-              <input type="text" class="form-control" id="name">
-            </div>
+<!--  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
+<!--       aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Add New User</h5>-->
+<!--          <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--            <span aria-hidden="true">&times;</span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          <form>-->
 <!--            <div class="form-group">-->
-<!--              <label for="farmer-name" class="col-form-label font-weight-normal">age:</label>-->
-<!--              <input type="text" class="form-control" id="age">-->
+<!--              <label for="user-name" class="col-form-label font-weight-normal">User Name</label>-->
+<!--              <input type="text" class="form-control" name="userName" [(ngModel)]="userName" id="user-name">-->
 <!--            </div>-->
-            <div class="form-group">
-              <label for="email" class="col-form-label font-weight-normal">Email:</label>
-              <input type="email" class="form-control" id="email">
-            </div>
 <!--            <div class="form-group">-->
-<!--              <label for="message-text" class="col-form-label">Age:</label>-->
-<!--              <textarea class="form-control" id="message-text"></textarea>-->
+<!--              <label for="email" class="col-form-label font-weight-normal">Email</label>-->
+<!--              <input type="email" class="form-control" name="email" [(ngModel)]="email" id="email">-->
 <!--            </div>-->
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<!--            <div class="form-group">-->
+<!--              <label for="role" class="col-form-label font-weight-normal">Role</label>-->
+<!--              <div id="role">-->
+<!--                <div class="custom-control custom-radio">-->
+<!--                  <input [(ngModel)]="role" class="custom-control-input" checked id="head-office"-->
+<!--                         name="permission"-->
+<!--                         type="radio"-->
+<!--                         value="head-office">-->
+<!--                  <label for="head-office" class="custom-control-label">Head Office Manager</label>-->
+<!--                </div>-->
+<!--                <div class="custom-control custom-radio">-->
+<!--                  <input [(ngModel)]="role" class="custom-control-input" id="paying-officer"-->
+<!--                         name="permission"-->
+<!--                         type="radio" value="paying-officer">-->
+<!--                  <label for="paying-officer" class="custom-control-label">Paying Manager</label>-->
+<!--                </div>-->
+<!--                <div class="custom-control custom-radio">-->
+<!--                  <input [(ngModel)]="role" class="custom-control-input" id="center-manager"-->
+<!--                         name="permission"-->
+<!--                         type="radio" value="center-manager">-->
+<!--                  <label for="center-manager" class="custom-control-label">Center Manager</label>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div *ngIf="role === 'center-manager' || role === 'paying-officer'" class="form-group">-->
+<!--              <label for="centers" class="col-form-label">Center ID:</label>-->
+<!--              <select class="form-control" [(ngModel)]="selectedCenter" name="centers" id="centers">-->
+<!--                <option *ngFor="let center of centers"-->
+<!--                        [value]="center.registrationId">{{center.registrationId + ' - ' + center.name}}</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--          <button type="button" class="btn btn-primary" (click)="save()">Save</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>

@@ -17,7 +17,7 @@ import {CenterDetailComponent} from './views/center-detail/center-detail.compone
 import {UsersComponent} from './views/users/users.component';
 import {VehicleComponent} from './views/vehicle/vehicle.component';
 import {AuthGuard} from './guard/auth/auth.guard';
-import {RoleGuard} from "./guard/role/role.guard";
+import {RoleGuard} from './guard/role/role.guard';
 import {ConfigurationScreenComponent} from './views/configuration-screen/configuration-screen.component';
 import {DailyLimitsComponent} from './views/daily-limits/daily-limits.component';
 
