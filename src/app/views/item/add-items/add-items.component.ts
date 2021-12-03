@@ -62,7 +62,7 @@ export class AddItemsComponent implements OnInit {
   }
 
   getRecordsById() {
-    this.paddyService.getFarmerById(this.farmerId)
+    this.paddyService.getPaddyById(this.farmerId)
       .subscribe(response => {
           this.tableData = [response];
         }, () => {

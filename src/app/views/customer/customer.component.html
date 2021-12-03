@@ -24,10 +24,10 @@
         <div class="row">
           <div class="col-5">
             <form>
-<!--              <div class="form-group">-->
-<!--                <label for="regNo" class="col-form-label font-weight-normal">Registration No:</label>-->
-<!--                <input type="text" class="form-control" id="regNo" [(ngModel)]="regNo" name="regNo">-->
-<!--              </div>-->
+              <!--              <div class="form-group">-->
+              <!--                <label for="regNo" class="col-form-label font-weight-normal">Registration No:</label>-->
+              <!--                <input type="text" class="form-control" id="regNo" [(ngModel)]="regNo" name="regNo">-->
+              <!--              </div>-->
               <div class="form-group">
                 <label for="firstName" class="col-form-label font-weight-normal">First Name:</label>
                 <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" name="firstName">
@@ -51,7 +51,8 @@
               <div class="form-group">
                 <label for="address" class="col-form-label">Center ID:</label>
                 <select class="form-control" [(ngModel)]="centers" name="centers" id="centers">
-                  <option value="1">01</option>
+                  <option *ngFor="let center of centerList"
+                          [value]="center.registrationId">{{center.registrationId + ' - ' + center.name}}</option>
                 </select>
               </div>
             </form>
@@ -73,7 +74,7 @@
                 <th>Last Name</th>
                 <th>Address</th>
                 <th>Age</th>
-                <th>Center ID</th>
+                <th>Center Name</th>
                 <th>Action</th>
               </tr>
               </thead>
@@ -85,8 +86,8 @@
                 <td>{{data.middleName}}</td>
                 <td>{{data.lastName}}</td>
                 <td>{{data.address}}</td>
-                <td>{{data.centerId}}</td>
                 <td>{{data.age}}</td>
+                <td>{{data.centerName}}</td>
                 <td>
                   <button class="btn btn-outline-danger" (click)="deleteRecord(data.registrationNo)"><i
                     class="fa fa-trash" aria-hidden="true"></i></button>

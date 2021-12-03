@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {DashboardComponent} from './views/dashboard/dashboard.component';
 import {AdminComponent} from './layouts/admin/admin.component';
 import {LoginComponent} from './views/login/login.component';
@@ -17,9 +17,10 @@ import {CenterDetailComponent} from './views/center-detail/center-detail.compone
 import {UsersComponent} from './views/users/users.component';
 import {VehicleComponent} from './views/vehicle/vehicle.component';
 import {AuthGuard} from './guard/auth/auth.guard';
-import {RoleGuard} from "./guard/role/role.guard";
+import {RoleGuard} from './guard/role/role.guard';
 import {ConfigurationScreenComponent} from './views/configuration-screen/configuration-screen.component';
 import {DailyLimitsComponent} from './views/daily-limits/daily-limits.component';
+import {PaddyReportComponent} from './views/reports/paddy-report/paddy-report.component';
 
 const routes: Routes = [
   {
@@ -27,35 +28,37 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'customers', component: CustomerComponent },
-      { path: 'paddy', component: ItemComponent,
+      {path: 'dashboard', component: DashboardComponent},
+      {path: 'customers', component: CustomerComponent},
+      {
+        path: 'paddy', component: ItemComponent,
         children: [
-          { path: 'add-item', component: AddItemsComponent },
-          { path: 'edit-item', component: EditItemsComponent },
-          { path: 'view-items', component: ViewItemsComponent },
-          { path: 'categories', component: CategoriesComponent },
-          { path: 'sub-categories', component: SubCategoriesComponent },
-          { path: '', redirectTo: 'view-items', pathMatch: 'full' },
+          {path: 'add-item', component: AddItemsComponent},
+          {path: 'edit-item', component: EditItemsComponent},
+          {path: 'view-items', component: ViewItemsComponent},
+          {path: 'categories', component: CategoriesComponent},
+          {path: 'sub-categories', component: SubCategoriesComponent},
+          {path: '', redirectTo: 'view-items', pathMatch: 'full'},
         ],
         canActivate: [RoleGuard], data: {roles: ['ROLE_HEAD_OFFICE_MANAGER']}
       },
-      { path: 'orders', component: OrdersComponent , canActivate: [RoleGuard], data: {roles: ['ROLE_HEAD_OFFICE_MANAGER']}},
-      { path: 'place-orders', component: PlaceOrderComponent },
-      { path: 'price-management', component: PriceManagementComponent },
-      { path: 'center-details', component: CenterDetailComponent },
-      { path: 'users', component: UsersComponent },
-      { path: 'vehicle', component: VehicleComponent },
-      { path: 'configuration-screen', component: ConfigurationScreenComponent },
-      { path: 'daily-limit', component: DailyLimitsComponent },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {path: 'orders', component: OrdersComponent, canActivate: [RoleGuard], data: {roles: ['ROLE_HEAD_OFFICE_MANAGER']}},
+      {path: 'place-orders', component: PlaceOrderComponent},
+      {path: 'price-management', component: PriceManagementComponent},
+      {path: 'center-details', component: CenterDetailComponent},
+      {path: 'users', component: UsersComponent},
+      {path: 'vehicle', component: VehicleComponent},
+      {path: 'configuration-screen', component: ConfigurationScreenComponent},
+      {path: 'daily-limit', component: DailyLimitsComponent},
+      {path: 'reports/paddy-report', component: PaddyReportComponent},
+      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     ],
   },
   {
     path: 'login',
     component: LoginComponent,
   },
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  {path: '', pathMatch: 'full', redirectTo: 'login'},
 ];
 
 
@@ -63,4 +66,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
