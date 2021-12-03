@@ -11,15 +11,19 @@ export class PaddyService {
   }
 
   saveOrUpdate(paddyDto: Paddy_dto): Observable<any> {
-    return this.http.post(BASE_URL + 'paddy' , paddyDto);
+    return this.http.post(BASE_URL + 'paddy', paddyDto);
   }
 
   getAllPaddy(): Observable<any> {
     return this.http.get(BASE_URL + 'paddy/all');
   }
 
-  getFarmerById(id: number) {
+  getPaddyById(id: number) {
     return this.http.get(BASE_URL + 'paddy/' + id);
+  }
+
+  getPaddyReportData(fromDate: string, toDate: string, centerId: number, farmerId: number): Observable<any> {
+    return this.http.get(BASE_URL + 'paddy/paddy-report/' + fromDate + '/' + toDate + '/' + centerId + '/' + farmerId);
   }
 
 }

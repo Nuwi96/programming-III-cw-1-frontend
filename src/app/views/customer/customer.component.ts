@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FarmerService} from '../../services/farmer/farmer.service';
 import {Farmer_dto} from '../../dto/farmer_dto';
 import {ToastrService} from 'ngx-toastr';
+import {Center_dto} from '../../dto/center_dto';
+import {CenterService} from '../../services/center/center.service';
 
 @Component({
   selector: 'app-customer',
@@ -19,11 +21,24 @@ export class CustomerComponent implements OnInit {
   address: string = '';
   centers: number = 0;
 
-  constructor(private farmerService: FarmerService, private toastr: ToastrService) {
+  centerList: Array<Center_dto> = [];
+
+  constructor(private farmerService: FarmerService, private centerService: CenterService, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
+    this.getAllCenters();
     this.getAllFarmer();
+  }
+
+  getAllCenters() {
+    this.centerService.getAllActiveCenters()
+      .subscribe(response => {
+          this.centerList = response;
+        }, () => {
+          this.error();
+        }
+      );
   }
 
   getAllFarmer() {
@@ -71,11 +86,12 @@ export class CustomerComponent implements OnInit {
   }
 
   save() {
-    if ('' !== this.firstName &&  '' !== this.middleName &&
-      '' !== this.lastName &&   '' !== this.address &&  0 !== this.farmerAge) {
+    if ('' !== this.firstName && '' !== this.middleName &&
+      '' !== this.lastName && '' !== this.address && 0 !== this.farmerAge) {
       const dataDto: Farmer_dto = {
         registrationNo: !this.regNo ? 0 : this.regNo,
         centerId: this.centers,
+        centerName: '',
         firstName: this.firstName,
         middleName: this.middleName,
         lastName: this.lastName,
@@ -83,18 +99,18 @@ export class CustomerComponent implements OnInit {
         age: this.farmerAge,
         isActive: 1,
       };
-    this.farmerService.saveOrUpdate(dataDto)
-      .subscribe(response => {
-        this.toastr.success('Updated Successfully', '', {
-          timeOut: 2000,
-          positionClass: 'toast-top-right'
+      this.farmerService.saveOrUpdate(dataDto)
+        .subscribe(response => {
+          this.toastr.success('Updated Successfully', '', {
+            timeOut: 2000,
+            positionClass: 'toast-top-right'
+          });
+          this.clear();
+          this.getAllFarmer();
+        }, () => {
+          this.error();
         });
-        this.clear();
-        this.getAllFarmer();
-      }, () => {
-        this.error();
-      });
-    }else{
+    } else {
       this.toastr.error('Please Fill All the Required Fields', '', {
         timeOut: 2000,
         positionClass: 'toast-top-right'
