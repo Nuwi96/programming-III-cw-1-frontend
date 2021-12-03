@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TokenStorageService} from "../../services/token-storage/token-storage.service";
+import {TokenStorageService} from '../../services/token-storage/token-storage.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -31,13 +31,13 @@ export class SideBarComponent implements OnInit {
       },
       {
         header: 'USER MANAGEMENT',
-        isShow: this.user.roles.indexOf('ROLE_SUP_ADMIN_P') > -1,
+        isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
         links: [
           {
-            title: 'Manage Users & Permissions',
-            isShow: this.user.roles.indexOf('ROLE_SUP_ADMIN_P') > -1,
+            title: 'Manage Users',
+            isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
             iconClass: 'nav-icon fas fa-users-cog',
-            url: '/auth/manage-users'
+            url: '/admin/users'
           }
         ]
       },
@@ -52,7 +52,8 @@ export class SideBarComponent implements OnInit {
             url: '/admin/orders'
           }
         ]
-      },{
+      },
+      {
         header: null,
         isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
         links: [
@@ -63,7 +64,7 @@ export class SideBarComponent implements OnInit {
             url: '/admin/customers'
           }
         ]
-      },{
+      }, {
         header: null,
         isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
         links: [
@@ -74,7 +75,7 @@ export class SideBarComponent implements OnInit {
             url: '/admin/paddy/add-item',
           }
         ]
-      },{
+      }, {
         header: null,
         isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
         links: [
@@ -85,7 +86,7 @@ export class SideBarComponent implements OnInit {
             url: '/admin/center-details'
           }
         ]
-      },{
+      }, {
         header: null,
         isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
         links: [
@@ -96,7 +97,7 @@ export class SideBarComponent implements OnInit {
             url: '/admin/configuration-screen'
           }
         ]
-      },{
+      }, {
         header: null,
         isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
         links: [
