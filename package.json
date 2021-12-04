@@ -28,6 +28,8 @@
     "angular-material-datepicker": "^1.0.2",
     "angular-toastify": "^1.0.4",
     "angular-toastr": "^2.1.1",
+    "jquery": "^3.5.1",
+    "ng2-charts": "^2.4.3",
     "ngx-pagination": "^5.0.0",
     "ngx-toaster": "^1.0.1",
     "ngx-toastr": "^13.2.1",

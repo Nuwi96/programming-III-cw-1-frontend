@@ -1,0 +1,118 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Reports</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="['/admin/dashboard']">Home</a></li>
+            <li class="breadcrumb-item active">Reports</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-2">
+            <label for="center" class="col-form-label">Center:</label>
+            <select class="form-control" name="center" id="center" (change)="getFarmersByCenterId()"
+                    [(ngModel)]="selectedCenterId">
+              <option value="0">All Centers</option>
+              <option *ngFor="let center of centerList"
+                      [value]="center.registrationId">{{center.registrationId + ' - ' + center.name}}</option>
+            </select>
+          </div>
+
+          <div class="col-2">
+            <label for="farmer" class="col-form-label">Farmer:</label>
+            <select class="form-control" name="farmer" id="farmer" [(ngModel)]="selectedFarmerId">
+              <option value="0">All Farmers</option>
+              <option *ngFor="let farmer of farmerList"
+                      [value]="farmer.registrationNo">{{farmer.registrationNo + ' - ' + farmer.firstName + ' ' + farmer.lastName}}</option>
+            </select>
+          </div>
+
+          <div class="col-3 mt-4">
+            <mat-form-field appearance="fill" class="example-form-field col">
+              <mat-label>From Date</mat-label>
+              <input matInput [matDatepicker]="fromDatepicker" [(ngModel)]="fromDate" name="fromDate"
+                     (dateChange)="fromDateChange($event)">
+              <mat-datepicker-toggle matSuffix [for]="fromDatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #fromDatepicker>
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3 mt-4">
+            <mat-form-field appearance="fill" class="example-form-field col">
+              <mat-label>To Date</mat-label>
+              <input matInput [matDatepicker]="toDatepicker" [(ngModel)]="toDate" name="toDate"
+                     (dateChange)="toDateChange($event)">
+              <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #toDatepicker>
+              </mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-2 mt-4">
+            <button type="button" class="btn btn-success mt-4" (click)="getPaddyReportData()">Search</button>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="card-header green">
+              <h3 class="card-title">Paddy Report</h3>
+            </div>
+
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th>Farmer ID</th>
+                <th>Farmer Name</th>
+                <th>Total Collected Paddy (Kg)</th>
+                <th>Total Paid Amount (LKR)</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let data of tableData | paginate: { itemsPerPage: 10, currentPage: pVbelt }">
+                <td>{{data.farmerId}}</td>
+                <td>{{data.farmerName}}</td>
+                <td>{{data.totalWeight}}</td>
+                <td>{{data.totalPaidAmount}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="clearfix">
+              <ul class="pagination pagination-sm m-0 float-right">
+                <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
+              </ul>
+            </div>
+          </div>
+          <!-- /.card-header -->
+
+          <div class="col-4" *ngIf="paddyReportList.length > 0">
+            <canvas baseChart
+                    [data]="chartData"
+                    [labels]="chartLabels"
+                    [legend]="chartLegend"
+                    [chartType]="'pie'">
+            </canvas>
+          </div>
+        </div>
+
+        <!-- /.card-body -->
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>

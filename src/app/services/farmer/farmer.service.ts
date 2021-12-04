@@ -25,6 +25,10 @@ export class FarmerService {
   getFarmerById(registrationNo: number) {
     return this.http.get(BASE_URL + 'farmers/' + registrationNo);
   }
+
+  getFarmersByCenterId(registrationId: number): Observable<any> {
+    return this.http.get(BASE_URL + 'farmers/by-center/' + registrationId);
+  }
   deleteById(registrationNo: number) {
     return this.http.delete(BASE_URL + 'farmers/' + registrationNo);
   }
