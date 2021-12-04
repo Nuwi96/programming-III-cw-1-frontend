@@ -101,10 +101,17 @@ export class AddItemsComponent implements OnInit {
       };
       this.paddyService.saveOrUpdate(dataDto)
         .subscribe(response => {
-          this.toastr.success('Updated Successfully', '', {
-            timeOut: 2000,
-            positionClass: 'toast-top-right'
-          });
+          if (response.code === 200) {
+            this.toastr.success(response.message, '', {
+              timeOut: 4000,
+              positionClass: 'toast-top-right'
+            });
+          } else {
+            this.toastr.error(response.message, 'Validation Error', {
+              timeOut: 10000,
+              positionClass: 'toast-top-right'
+            });
+          }
           this.clear();
           this.getAllRecords();
         }, () => {
@@ -112,7 +119,7 @@ export class AddItemsComponent implements OnInit {
         });
     } else {
       this.toastr.error('Please Fill All the Required Fields', '', {
-        timeOut: 2000,
+        timeOut: 4000,
         positionClass: 'toast-top-right'
       });
     }
