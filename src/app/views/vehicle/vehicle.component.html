@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Vehicle</h1>
+          <h1 class="m-0 text-dark">Vehicle</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -20,78 +20,71 @@
   <!-- Main content -->
   <section class="content">
     <div class="card">
-      <div class="card-body p-0">
-        <div class="card-footer clearfix">
-          <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#exampleModal"><i
-            class="fas fa-plus"></i> Add
-          </button>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5">
+            <form>
+              <div class="form-group">
+                <label  class="col-form-label font-weight-normal">Vehicle No:</label>
+                <input type="text" class="form-control" name="vehicle" [(ngModel)]="vehicle">
+<!--                <select name="vehicle" id="" class="form-control" [(ngModel)]="vehicle">-->
+<!--                  <option *ngFor="let vehicle of vehicleList"-->
+<!--                          [value]="vehicle.vehicleNo">{{vehicle.vehicleNo}}</option>-->
+<!--                </select>-->
+              </div>
+              <div class="form-group">
+                <label for="capacity" class="col-form-label font-weight-normal">Max Capacity:</label>
+                <input type="number" name="capacity" class="form-control" id="capacity" [(ngModel)]="capacity">
+              </div>
+              <div class="form-group">
+                <label for="availability" class="col-form-label font-weight-normal">Availability:</label>
+                <select name="availability" class="form-control" id="availability" [(ngModel)]="availability">
+                  <option value="true">TRUE</option>
+                  <option value="false">FALSE</option>
+                </select>
+              </div>
+            </form>
+            <div class="float-right">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">Clear</button>
+              <button type="button" class="btn btn-primary ml-2" (click)="save()">Save</button>
+            </div>
+          </div>
+          <div class="col-7">
+            <div class="card-header green">
+              <h3 class="card-title">All Vehicle</h3>
+            </div>
+            <!-- /.card-header -->
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Vehicle No</th>
+                <th>Max Capacity</th>
+                <th>Availability</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let data of tableData | paginate: { itemsPerPage: 10, currentPage: pVbelt }" (click)="getRecord(data)">
+                <td>{{data.vehicleNo}}</td>
+                <td>{{data.maxCapacity}}</td>
+                <td>{{data.availability}}</td>
+                <td>
+                  <button class="btn btn-outline-danger" (click)="deleteRecord(data.vehicleNo)"><i
+                    class="fa fa-trash" aria-hidden="true"></i></button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="clearfix">
+              <ul class="pagination pagination-sm m-0 float-right">
+                <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="card-header green">
-          <h3 class="card-title">All Vehicle</h3>
-        </div>
-        <!-- /.card-header -->
-        <table class="table">
-          <thead>
-          <tr>
-            <th>Vehicle No</th>
-            <th>#</th>
-            <th>#</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">
-            <td>{{vbelt.serialNo}}</td>
-            <td>{{vbelt.beltSize}}</td>
-            <td>{{vbelt.beltName}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="card-footer clearfix">
-        <ul class="pagination pagination-sm m-0 float-right">
-          <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
-        </ul>
       </div>
       <!-- /.card-body -->
     </div>
   </section>
   <!-- /.content -->
-  <!--  modal-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-       aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Add New Vehicle</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="name" class="col-form-label font-weight-normal">Vehicle No:</label>
-              <input type="text" class="form-control" id="name">
-            </div>
-<!--            <div class="form-group">-->
-<!--              <label for="farmer-name" class="col-form-label font-weight-normal">age:</label>-->
-<!--              <input type="text" class="form-control" id="age">-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <label for="email" class="col-form-label font-weight-normal">Email:</label>-->
-<!--              <input type="email" class="form-control" id="email">-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--              <label for="message-text" class="col-form-label">Age:</label>-->
-<!--              <textarea class="form-control" id="message-text"></textarea>-->
-<!--            </div>-->
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

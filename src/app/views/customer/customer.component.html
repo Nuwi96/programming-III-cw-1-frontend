@@ -65,36 +65,38 @@
             <div class="card-header green">
               <h3 class="card-title">All Farmers</h3>
             </div>
-            <table class="table">
-              <thead>
-              <tr>
-                <th># Registration No.</th>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
-                <th>Address</th>
-                <th>Age</th>
-                <th>Center Name</th>
-                <th>Action</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let data of tableData | paginate: { itemsPerPage: 10, currentPage: pVbelt }"
-                  (click)="getRecord(data)">
-                <td>{{data.registrationNo}}</td>
-                <td>{{data.firstName}}</td>
-                <td>{{data.middleName}}</td>
-                <td>{{data.lastName}}</td>
-                <td>{{data.address}}</td>
-                <td>{{data.age}}</td>
-                <td>{{data.centerName}}</td>
-                <td>
-                  <button class="btn btn-outline-danger" (click)="deleteRecord(data.registrationNo)"><i
-                    class="fa fa-trash" aria-hidden="true"></i></button>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+           <div class="scroll">
+             <table class="table">
+               <thead>
+               <tr>
+                 <th># Registration No.</th>
+                 <th>First Name</th>
+                 <th>Middle Name</th>
+                 <th>Last Name</th>
+                 <th>Address</th>
+                 <th>Age</th>
+                 <th>Center Name</th>
+                 <th>Action</th>
+               </tr>
+               </thead>
+               <tbody>
+               <tr *ngFor="let data of tableData | paginate: { itemsPerPage: 10, currentPage: pVbelt }"
+                   (click)="getRecord(data)">
+                 <td>{{data.registrationNo}}</td>
+                 <td>{{data.firstName}}</td>
+                 <td>{{data.middleName}}</td>
+                 <td>{{data.lastName}}</td>
+                 <td>{{data.address}}</td>
+                 <td>{{data.age}}</td>
+                 <td>{{data.centerName}}</td>
+                 <td>
+                   <button class="btn btn-outline-danger" (click)="deleteRecord(data.registrationNo)"><i
+                     class="fa fa-trash" aria-hidden="true"></i></button>
+                 </td>
+               </tr>
+               </tbody>
+             </table>
+           </div>
             <div class="clearfix">
               <ul class="pagination pagination-sm m-0 float-right">
                 <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
