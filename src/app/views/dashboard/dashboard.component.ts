@@ -24,10 +24,17 @@ export class DashboardComponent implements OnInit {
     var date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.daily_limitService.getAllRecordsByDate(date)
       .subscribe(response => {
-          this.buyingLimit = response[0].buying_limit + ' Kg';
-          this.sellingLimit = response[0].selling_limit + ' Kg';
-          this.buyingPrice = 'Rs ' + response[0].buying_price ;
-          this.sellingPrice = 'Rs ' +response[0].selling_price;
+          if (0 !== response.length) {
+            this.buyingLimit = response[0].buying_limit + ' Kg';
+            this.sellingLimit = response[0].selling_limit + ' Kg';
+            this.buyingPrice = 'Rs ' + response[0].buying_price;
+            this.sellingPrice = 'Rs ' + response[0].selling_price;
+          } else {
+            this.buyingLimit = 0 + ' Kg';
+            this.sellingLimit = 0 + ' Kg';
+            this.buyingPrice = 'Rs ' + 0;
+            this.sellingPrice = 'Rs ' + 0;
+          }
         }, () => {
 
         }
