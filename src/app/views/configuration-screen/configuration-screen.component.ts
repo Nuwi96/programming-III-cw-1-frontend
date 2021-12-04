@@ -65,25 +65,25 @@ export class ConfigurationScreenComponent implements OnInit {
 
   save() {
     if (0 !== this.centedID) {
-    const dataDto: Center_dto = {
-      registrationId: !this.centedID ? 0 : this.centedID,
-      paddyLimited: this.checked,
-      name: this.response['name'],
-      capacity: this.response['capacity'],
-      latitude: this.response['latitude'],
-      longitude: this.response['longitude'],
-      isActive: 1,
-    };
-    this.centerService.saveOrUpdate(dataDto)
-      .subscribe(response => {
-        this.toastr.success('Updated Successfully', '', {
-          timeOut: 2000,
-          positionClass: 'toast-top-right'
+      const dataDto: Center_dto = {
+        registrationId: !this.centedID ? 0 : this.centedID,
+        paddyLimited: this.checked,
+        name: this.response['name'],
+        capacity: this.response['capacity'],
+        latitude: this.response['latitude'],
+        longitude: this.response['longitude'],
+        isActive: 1,
+      };
+      this.centerService.saveOrUpdate(dataDto)
+        .subscribe(response => {
+          this.toastr.success('Updated Successfully', '', {
+            timeOut: 2000,
+            positionClass: 'toast-top-right'
+          });
+          this.clear();
+        }, () => {
+          this.error();
         });
-        this.clear();
-      }, () => {
-        this.error();
-      });
     } else {
       this.toastr.error('Please Fill All the Required Fields', '', {
         timeOut: 2000,

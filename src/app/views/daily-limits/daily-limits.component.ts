@@ -84,7 +84,7 @@ export class DailyLimitsComponent implements OnInit {
 
   error() {
     this.toastr.error('Something Went wrong', '', {
-      timeOut: 2000,
+      timeOut: 10000,
       positionClass: 'toast-top-right'
     });
   }

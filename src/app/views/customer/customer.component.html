@@ -51,7 +51,10 @@
               <div class="form-group">
                 <label for="address" class="col-form-label">Center ID:</label>
                 <select class="form-control" [(ngModel)]="centers" name="centers" id="centers">
-                  <option value="1">01</option>
+                  <option value="0">Select a Center</option>
+                  <option *ngFor="let data of centerList" [ngValue]="data.registrationId">
+                    {{ data.name  }}
+                  </option>
                 </select>
               </div>
             </form>

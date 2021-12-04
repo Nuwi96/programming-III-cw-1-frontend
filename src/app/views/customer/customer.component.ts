@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FarmerService} from '../../services/farmer/farmer.service';
 import {Farmer_dto} from '../../dto/farmer_dto';
 import {ToastrService} from 'ngx-toastr';
+import {CenterService} from '../../services/center/center.service';
 
 @Component({
   selector: 'app-customer',
@@ -18,12 +19,14 @@ export class CustomerComponent implements OnInit {
   farmerAge: number = 0;
   address: string = '';
   centers: number = 0;
+  centerList:any;
 
-  constructor(private farmerService: FarmerService, private toastr: ToastrService) {
+  constructor(private farmerService: FarmerService,private centerService: CenterService, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
     this.getAllFarmer();
+    this.getAllCenters();
   }
 
   getAllFarmer() {
@@ -102,7 +105,16 @@ export class CustomerComponent implements OnInit {
     }
 
   }
-
+  getAllCenters() {
+    this.centerService.getAllActiveCenters()
+      .subscribe(response => {
+          console.log(response);
+          this.centerList = response;
+        }, () => {
+          this.error();
+        }
+      );
+  }
   error() {
     this.toastr.error('Something Went wrong', '', {
       timeOut: 2000,
