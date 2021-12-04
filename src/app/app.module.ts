@@ -49,6 +49,8 @@ import {CenterService} from './services/center/center.service';
 import {PaddyService} from './services/paddy/paddy.service';
 import {PaddyReportComponent} from './views/reports/paddy-report/paddy-report.component';
 import {ChartsModule} from 'ng2-charts';
+import {OrderService} from './services/order/order.service';
+import {VehicleService} from './services/vehicle/vehicle.service';
 
 @NgModule({
   declarations: [
@@ -103,7 +105,9 @@ import {ChartsModule} from 'ng2-charts';
     Daily_limitService,
     DatePipe,
     CenterService,
-    PaddyService
+    PaddyService,
+    OrderService,
+    VehicleService
   ],
   bootstrap: [AppComponent]
 })

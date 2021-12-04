@@ -2,3 +2,6 @@
   background-color: #627266  !important;
   color: #ffff !important;
 }
+.scroll{
+  overflow-x: auto !important;
+}

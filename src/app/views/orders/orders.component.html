@@ -20,86 +20,89 @@
   <!-- Main content -->
   <section class="content">
     <div class="card">
-      <div class="card-body p-0">
-        <div class="card-footer clearfix">
-          <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#exampleModal"><i
-            class="fas fa-plus"></i> Add
-          </button>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5">
+            <form>
+              <div class="form-group">
+                <label for="centerID" class="col-form-label font-weight-normal">Center ID:</label>
+                <select name="centerID" class="form-control" [(ngModel)]="centerId"  id="centerID">
+                  <option *ngFor="let center of centerList"
+                          [value]="center.registrationId">{{center.registrationId + ' - ' + center.name}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="VehicleID" class="col-form-label font-weight-normal">Vehicle ID:</label>
+                <select name="VehicleID" class="form-control" [(ngModel)]="vehicleId"  id="VehicleID">
+                  <option value="">AAAA</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="weight" class="col-form-label font-weight-normal">Order Weight:</label>
+                <input type="number" class="form-control" [(ngModel)]="orderedWeight" name="weight"  id="weight">
+              </div>
+              <div class="form-group">
+                <label for="amount" class="col-form-label font-weight-normal">Paid Amount:</label>
+                <input type="number" class="form-control" [(ngModel)]="paidAmount" name="amount"  id="amount">
+              </div>
+              <div class="form-group">
+                <label for="type" class="col-form-label font-weight-normal">order Type:</label>
+                <input type="text" class="form-control" [(ngModel)]="orderType" name="type"  id="type">
+              </div>
+              <div class="form-group">
+                <mat-form-field appearance="fill" class="example-form-field col">
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [matDatepicker]="datepicker" [(ngModel)]="orderedDate" name="date"
+                         >
+                  <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker>
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+            </form>
+            <div class="float-right">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">Clear</button>
+              <button type="button" class="btn btn-primary ml-2" (click)="save()">Save</button>
+            </div>
+          </div>
+          <div class="col-7">
+            <div class="card-header green">
+              <h3 class="card-title">All Orders</h3>
+            </div>
+            <div class="scroll">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Order ID.</th>
+                  <th>Center ID.</th>
+                  <th>Vehicle ID.</th>
+                  <th>Order Type</th>
+                  <th>Paid Amount</th>
+                  <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">
+                  <td>{{vbelt.serialNo}}</td>
+                  <td>{{vbelt.beltSize}}</td>
+                  <td>{{vbelt.beltName}}</td>
+                  <td>{{vbelt.qtyOnHand}}</td>
+                  <td>{{vbelt.sellingPrice}}</td>
+                  <td>{{vbelt.sellingPrice}}</td>
+                </tr>
+                </tbody>
+              </table>
+              </div>
+            <div class="clearfix">
+              <ul class="pagination pagination-sm m-0 float-right">
+                <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="card-header green">
-          <h3 class="card-title">Orders</h3>
-        </div>
-        <!-- /.card-header -->
-        <table class="table">
-          <thead>
-          <tr>
-            <th># Order ID.</th>
-            <th>Place By</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>#</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">
-            <td>{{vbelt.serialNo}}</td>
-            <td>{{vbelt.beltSize}}</td>
-            <td>{{vbelt.beltName}}</td>
-            <td>{{vbelt.qtyOnHand}}</td>
-            <td>{{vbelt.sellingPrice}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="card-footer clearfix">
-        <ul class="pagination pagination-sm m-0 float-right">
-          <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>
-        </ul>
       </div>
       <!-- /.card-body -->
     </div>
   </section>
   <!-- /.content -->
-  <!--  modal-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-       aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Add New Order</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="centerID" class="col-form-label font-weight-normal">Center ID:</label>
-              <select name="" class="form-control" id="centerID">
-                <option value="">AAAA</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="VehicleID" class="col-form-label font-weight-normal">Vehicle ID:</label>
-              <select name="" class="form-control" id="VehicleID">
-                <option value="">AAAA</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="placeBy" class="col-form-label font-weight-normal">Placed By:</label>
-              <input type="text" class="form-control" id="placeBy">
-            </div>
-            <div class="form-group">
-              <label for="address" class="col-form-label">Address:</label>
-              <textarea class="form-control" id="address"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
