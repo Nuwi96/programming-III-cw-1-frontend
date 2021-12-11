@@ -26,34 +26,37 @@
             <form>
               <div class="form-group">
                 <label for="centerID" class="col-form-label font-weight-normal">Center ID:</label>
-                <select name="centerID" class="form-control" [(ngModel)]="centerId"  id="centerID">
+                <select name="centerID" class="form-control" [(ngModel)]="centerId" id="centerID">
                   <option *ngFor="let center of centerList"
                           [value]="center.registrationId">{{center.registrationId + ' - ' + center.name}}</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="VehicleID" class="col-form-label font-weight-normal">Vehicle ID:</label>
-                <select name="VehicleID" class="form-control" [(ngModel)]="vehicleId"  id="VehicleID">
-                  <option value="">AAAA</option>
+                <select id="VehicleID" name="VehicleID" class="form-control" [(ngModel)]="vehicleId">
+                  <option selected="selected" value="0">Select a Farmer</option>
+                  <option *ngFor="let data of vehicleList" [ngValue]="data.vehicleNo">
+                    {{ data.vehicleNo  }}
+                  </option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="weight" class="col-form-label font-weight-normal">Order Weight:</label>
-                <input type="number" class="form-control" [(ngModel)]="orderedWeight" name="weight"  id="weight">
+                <input type="number" class="form-control" [(ngModel)]="orderedWeight" name="weight" id="weight">
               </div>
               <div class="form-group">
                 <label for="amount" class="col-form-label font-weight-normal">Paid Amount:</label>
-                <input type="number" class="form-control" [(ngModel)]="paidAmount" name="amount"  id="amount">
+                <input type="number" class="form-control" [(ngModel)]="paidAmount" name="amount" id="amount">
               </div>
               <div class="form-group">
                 <label for="type" class="col-form-label font-weight-normal">order Type:</label>
-                <input type="text" class="form-control" [(ngModel)]="orderType" name="type"  id="type">
+                <input type="text" class="form-control" [(ngModel)]="orderType" name="type" id="type">
               </div>
               <div class="form-group">
                 <mat-form-field appearance="fill" class="example-form-field col">
                   <mat-label>Choose a date</mat-label>
                   <input matInput [matDatepicker]="datepicker" [(ngModel)]="orderedDate" name="date"
-                         >
+                  >
                   <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                   <mat-datepicker #datepicker>
                   </mat-datepicker>
@@ -92,7 +95,7 @@
                 </tr>
                 </tbody>
               </table>
-              </div>
+            </div>
             <div class="clearfix">
               <ul class="pagination pagination-sm m-0 float-right">
                 <pagination-controls class="page-item" (pageChange)="pVbelt = $event"></pagination-controls>

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Farmer_dto} from '../../dto/farmer_dto';
 import {CenterService} from '../../services/center/center.service';
 import {ToastrService} from 'ngx-toastr';
 import {OrderService} from '../../services/order/order.service';
 import {Order_dto} from '../../dto/order_dto';
 import {Center_dto} from '../../dto/center_dto';
+import {VehicleService} from '../../services/vehicle/vehicle.service';
+import {vehicle_dto} from '../../dto/vehicle_dto';
 
 @Component({
   selector: 'app-orders',
@@ -25,10 +27,15 @@ export class OrdersComponent implements OnInit {
 
   centerList: Array<Center_dto> = [];
 
-  constructor( private orderService: OrderService,private centerService: CenterService, private toastr: ToastrService) { }
+  vehicleList: Array<vehicle_dto> = [];
+
+  constructor(private orderService: OrderService, private centerService: CenterService, private toastr: ToastrService,
+              private vehicleService: VehicleService) {
+  }
 
   ngOnInit(): void {
-    this.getAllCenters()
+    this.getAllVehicles();
+    this.getAllCenters();
   }
 
   getAllCenters() {
@@ -40,13 +47,26 @@ export class OrdersComponent implements OnInit {
         }
       );
   }
+
   clear() {
 
   }
 
+  getAllVehicles() {
+    this.vehicleService.getAllActive()
+      .subscribe(response => {
+          console.log(response);
+          this.vehicleList = response;
+          this.tableData = response;
+        }, () => {
+          this.error();
+        }
+      );
+  }
+
   save() {
     if (0 !== this.centerId && 0 !== this.vehicleId &&
-     0 !== this.paidAmount && 0 !== this.orderedWeight && '' !== this.orderType) {
+      0 !== this.paidAmount && 0 !== this.orderedWeight && '' !== this.orderType) {
       const dataDto: Order_dto = {
         id: !this.regNo ? 0 : this.regNo,
         centerId: this.centerId,
@@ -59,13 +79,13 @@ export class OrdersComponent implements OnInit {
       this.orderService.saveOrUpdate(dataDto)
         .subscribe(response => {
           console.log(response);
-          if(response.code === 200){
+          if (response.code === 200) {
             this.toastr.success('Added Successfully', '', {
               timeOut: 2000,
               positionClass: 'toast-top-right'
             });
             this.clear();
-          }else{
+          } else {
             this.toastr.warning(response.message, '', {
               timeOut: 2000,
               positionClass: 'toast-top-right'
