@@ -84,20 +84,18 @@
               <thead>
               <tr>
                 <th>ID</th>
-                <th>Role</th>
+                <th>User Name</th>
                 <th>Email</th>
-                <th>#</th>
-                <th>#</th>
+                <th>Role</th>
               </tr>
               </thead>
               <tbody>
-              <!--          <tr *ngFor="let vbelt of vbelts | paginate: { itemsPerPage: 10, currentPage: pVbelt }">-->
-              <!--            <td>{{vbelt.serialNo}}</td>-->
-              <!--            <td>{{vbelt.beltSize}}</td>-->
-              <!--            <td>{{vbelt.beltName}}</td>-->
-              <!--            <td>{{vbelt.qtyOnHand}}</td>-->
-              <!--            <td>{{vbelt.sellingPrice}}</td>-->
-              <!--          </tr>-->
+              <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: pUser }">
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{convertRoles(user.roles)}}</td>
+              </tr>
               </tbody>
             </table>
           </div>

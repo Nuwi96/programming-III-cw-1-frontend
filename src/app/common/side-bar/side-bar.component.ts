@@ -55,22 +55,22 @@ export class SideBarComponent implements OnInit {
       },
       {
         header: null,
-        isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+        isShow: this.user.roles.indexOf('ROLE_CENTER_MANAGER') > -1,
         links: [
           {
             title: 'Farmers',
-            isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+            isShow: this.user.roles.indexOf('ROLE_CENTER_MANAGER') > -1,
             iconClass: 'nav-icon fas fa-chart-pie',
             url: '/admin/customers'
           }
         ]
       }, {
         header: null,
-        isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+        isShow: this.user.roles.indexOf('ROLE_CENTER_MANAGER') > -1,
         links: [
           {
             title: 'Paddy collection',
-            isShow: this.user.roles.indexOf('ROLE_HEAD_OFFICE_MANAGER') > -1,
+            isShow: this.user.roles.indexOf('ROLE_CENTER_MANAGER') > -1,
             iconClass: 'nav-icon fa-sitemap fas',
             url: '/admin/paddy/add-item',
           }
